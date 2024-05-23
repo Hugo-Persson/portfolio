@@ -1,0 +1,19 @@
+---
+import { MoonStar } from "lucide-astro";
+---
+
+<script>
+  const onClickLight = () => {
+    document.documentElement.classList.remove("mocha");
+    document.documentElement.classList.add("latte");
+    localStorage.setItem("theme", "light");
+  };
+
+  const onClickDark = () => {
+    document.documentElement.classList.add("mocha");
+    document.documentElement.classList.remove("latte");
+    localStorage.setItem("theme", "dark");
+  };
+</script>
+
+<MoonStar />

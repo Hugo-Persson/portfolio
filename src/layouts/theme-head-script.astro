@@ -1,0 +1,26 @@
+<script is:inline>
+  const theme = localStorage.getItem("theme");
+  function isDarkMode() {
+    return (
+      theme === "dark" ||
+      (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  }
+  function evalThemeSettings() {
+    if (isDarkMode()) {
+      document.documentElement.classList.remove("latte");
+      document.documentElement.classList.add("mocha");
+    } else {
+      document.documentElement.classList.add("latte");
+      document.documentElement.classList.remove("mocha");
+      document.documentElement.classList.add("latte");
+    }
+  }
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", ({ matches }) => {
+      evalThemeSettings();
+    });
+  evalThemeSettings();
+</script>
