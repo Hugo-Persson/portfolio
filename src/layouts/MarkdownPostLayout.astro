@@ -1,12 +1,25 @@
 ---
 import Layout from "./Layout.astro";
-const { frontmatter } = Astro.props;
+const { post } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
-  <p>{frontmatter.pubDate.slice(0, 10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-  <slot />
+<Layout title={post.data.title}>
+  <div class=""></div>
+  <article
+    class="max-w-[90rem] mx-auto flex-none prose prose-h1:text-text
+    prose-code:text-mauve
+    prose-strong:text-sky
+    prose-blockquote:bg-mantle prose-blockquote:border-l-mauve prose-blockquote:text-text
+    prose-h2:text-subtext0 prose-h3:text-subtext1"
+  >
+    <h1
+      class="mb-6 mt-10 text-2xl font-extrabold md:mr-6 md:text-4xl text-text"
+    >
+      {post.data.title}
+    </h1>
+
+    <main class="rounded-lg bg-crust text-text p-5">
+      <slot />
+    </main>
+  </article>
 </Layout>

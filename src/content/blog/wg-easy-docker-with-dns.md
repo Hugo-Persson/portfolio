@@ -5,13 +5,18 @@ pubDate: 2024-05-24
 tags: ["wireguard", "docker", "dns"]
 ---
 
-# Summary
+## Summary
 
-How to setup wg-dns. Also fixes
+In this guide, I'll show you how I set up a Wireguard server
+and a DNS server on the same host in my HomeLab.
+Many users face issues using a local DNS server with Wireguard.
+I'll explain how to configure Wireguard to access local devices
+and use a local DNS server like AdGuard Home,
+with both running in Docker on the same machine.
 
-# Content
+## Guide
 
-For my HomeLab I tried to setup a Wireguard server and DNS server on the same Host and it was just not working. If I used a DNS server like `1.1.1.1` it worked but not when using `192.168.x.x` that is my local DNS server. In this article I am going to show how to setup Wireguard to access all your local devices and use a local DNS server like [[adguard-home]]. A prerequisite is that we are running both our DNS server and Wireguard server in Docker on the same machine. For DNS server I am using [[adguard-home]] and for Wireguard server I am using [[wg-easy]], but this should work for any DNS server and wireguard server.
+For my HomeLab I tried to setup a Wireguard server and DNS server on the same Host and it was just not working. If I used a DNS server like `1.1.1.1` it worked but not when using `192.168.x.x` that is my local DNS server. In this article I am going to show how to setup Wireguard to access all your local devices and use a local DNS server like **AdGuard Home**. A prerequisite is that we are running both our DNS server and Wireguard server in Docker on the same machine. For DNS server I am using **AdGuard Home** and for Wireguard server I am using _wg-easy_, but this should work for any DNS server and wireguard server.
 
 ### Configuring DNS container
 
@@ -21,8 +26,9 @@ Before setting up Wireguard we need to tweak one thing with our DNS server. For 
 docker network create --subnet=172.22.0.0/16 dns
 ```
 
-> [!note]
-> We use the subnet `172.22.0.0/16` here, this could be any subnet but we need to set a subnet to be able to set a IPV4 adress for our container
+> We use the subnet `172.22.0.0/16` here,
+> this could be any subnet but we need to set a subnet to be able to set a
+> IPV4 adress for our container
 
 After this we need to connect our DNS container to this network, we do this defining our network in our `docker-compose` by adding this to the file:
 
@@ -48,7 +54,7 @@ docker compose up -d
 
 ### Configuring Wireguard
 
-It is now time to setup our [[wg-easy]] container.
+It is now time to setup our _wg-easy_ container.
 
 Create a new directory for this, like this:
 

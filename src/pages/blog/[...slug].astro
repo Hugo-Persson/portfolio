@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import { getCollection } from "astro:content";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
 
@@ -14,6 +15,6 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<MarkdownPostLayout frontmatter={entry.data}>
+<MarkdownPostLayout post={entry}>
   <Content />
 </MarkdownPostLayout>
