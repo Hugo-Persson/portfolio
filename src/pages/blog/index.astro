@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const title = "Blog";
+const description = "Latest articles.";
+
+const allPosts = await getCollection("blog");
+---
+
+<BaseLayout title={title}>
+  <div class="p-3 w-3/4 mx-auto text-text">
+    <h1 class="text-3xl font-bold">Blog</h1>
+    <hr class="mt-2 text-sky" />
+    <div class="w-100 flex flex-col gap-10 mt-10 justify-center">
+      {
+        allPosts.map((post, index) => {
+          const href = `/blog/${post.slug}`;
+          return (
+            <a href={href}>
+              <div class="bg-surface1 p-8 rounded-xl  cursor-pointer border-5 border-sky">
+                <div class="post-item">
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.description}</p>
+                  <div class="post-item-footer">
+                    <span class="post-item-date">— {post.data.pubDate}</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  h2,
+  .post-item-footer {
+    font-family: var(--font-family-sans);
+    font-weight: 700;
+  }
+
+  .post-item-date {
+    color: var(--text-secondary);
+    text-align: left;
+    text-transform: uppercase;
+    margin-right: 16px;
+  }
+</style>

@@ -1,4 +1,7 @@
 <script is:inline>
+  const lightThemeClass = "latte";
+  const darkThemeClass = "frappe";
+
   const theme = localStorage.getItem("theme");
   function isDarkMode() {
     return (
@@ -8,12 +11,11 @@
   }
   function evalThemeSettings() {
     if (isDarkMode()) {
-      document.documentElement.classList.remove("latte");
-      document.documentElement.classList.add("mocha");
+      document.documentElement.classList.remove(lightThemeClass);
+      document.documentElement.classList.add(darkThemeClass);
     } else {
-      document.documentElement.classList.add("latte");
-      document.documentElement.classList.remove("mocha");
-      document.documentElement.classList.add("latte");
+      document.documentElement.classList.remove(darkThemeClass);
+      document.documentElement.classList.add(lightThemeClass);
     }
   }
 
