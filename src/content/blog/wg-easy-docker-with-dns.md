@@ -7,30 +7,23 @@ tags: ["wireguard", "docker", "dns"]
 
 ## Summary
 
-In this guide, I'll show you how I set up a Wireguard server
-and a DNS server on the same host in my HomeLab.
-Many users face issues using a local DNS server with Wireguard.
-I'll explain how to configure Wireguard to access local devices
-and use a local DNS server like AdGuard Home,
-with both running in Docker on the same machine.
+In this guide, I will demonstrate how to set up a **WireGuard** server and a DNS server on the same host in my HomeLab. Many users encounter issues when using a local DNS server with **WireGuard**. I will explain how to configure **WireGuard** to access local devices and use a local DNS server like AdGuard Home, both running in Docker on the same machine.
 
 ## Guide
 
-For my HomeLab I tried to setup a Wireguard server and DNS server on the same Host and it was just not working. If I used a DNS server like `1.1.1.1` it worked but not when using `192.168.x.x` that is my local DNS server. In this article I am going to show how to setup Wireguard to access all your local devices and use a local DNS server like **AdGuard Home**. A prerequisite is that we are running both our DNS server and Wireguard server in Docker on the same machine. For DNS server I am using **AdGuard Home** and for Wireguard server I am using _wg-easy_, but this should work for any DNS server and wireguard server.
+For my HomeLab, I attempted to set up a **WireGuard** server and DNS server on the same host, but it was not working. While using a DNS server like `1.1.1.1` worked, my local DNS server at `192.168.x.x` did not. In this article, I will show you how to configure **WireGuard** to access all your local devices and use a local DNS server like **AdGuard Home**. The prerequisite is running both the DNS server and **WireGuard** server in Docker on the same machine. I use **AdGuard Home** for the DNS server and _wg-easy_ for the **WireGuard** server, but this setup should work for any DNS server and **WireGuard** server.
 
-### Configuring DNS container
+### Configuring the DNS Container
 
-Before setting up Wireguard we need to tweak one thing with our DNS server. For this to work our DNS container and Wireguard need to be on the same Docker network. First we create a network for this with:
+Before setting up **WireGuard**, we need to tweak the DNS server. Both the DNS container and **WireGuard** must be on the same Docker network. First, create a network with:
 
 ```shell
 docker network create --subnet=172.22.0.0/16 dns
 ```
 
-> We use the subnet `172.22.0.0/16` here,
-> this could be any subnet but we need to set a subnet to be able to set a
-> IPV4 adress for our container
+> We use the subnet `172.22.0.0/16` here. This could be any subnet, but we need to set a subnet to assign an IPV4 address to our container.
 
-After this we need to connect our DNS container to this network, we do this defining our network in our `docker-compose` by adding this to the file:
+Next, connect the DNS container to this network by defining the network in your `docker-compose` file:
 
 ```yaml
 networks:
@@ -38,33 +31,33 @@ networks:
     external: true
 ```
 
-After this we need to add the following to our DNS service:
+Then, add the following to your DNS service configuration:
 
-```shell
+```yaml
 networks:
-      dns:
-        ipv4_address: 172.22.0.2 # We later use this to configure our DNS server for our clients
+  dns:
+    ipv4_address: 172.22.0.2 # This will be used to configure our DNS server for clients
 ```
 
-You can now recreate your container with:
+Recreate your container with:
 
 ```shell
 docker compose up -d
 ```
 
-### Configuring Wireguard
+### Configuring **WireGuard**
 
-It is now time to setup our _wg-easy_ container.
+Now, set up the _wg-easy_ container.
 
-Create a new directory for this, like this:
+Create a new directory, like this:
 
 ```shell
-mkdir wireguard
+mkdir **WireGuard**
 ```
 
-And create a `docker-compose.yaml` file with the following content:
+Then, create a `docker-compose.yaml` file with the following content:
 
-```yaml unwrap:true title:"docker-compose.yaml"
+```yaml
 networks:
   dns:
     external: true
@@ -114,11 +107,10 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
 ```
 
-You can now recreate your container with:
+Recreate your container with:
 
 ```shell
 docker compose up -d
 ```
 
-For info about how to configure client and such, see the official documentation:
-<https://github.com/wg-easy/wg-easy/blob/master/README.md>
+For information on configuring clients and more details, refer to the official documentation: <https://github.com/wg-easy/wg-easy/blob/master/README.md>.
