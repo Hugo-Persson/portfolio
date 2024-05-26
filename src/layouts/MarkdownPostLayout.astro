@@ -12,13 +12,25 @@ const { post } = Astro.props;
     prose-blockquote:bg-mantle prose-blockquote:border-l-mauve prose-blockquote:text-text
     prose-h2:text-subtext0 prose-h3:text-subtext1
     prose-a:text-blue
+    prose-p:text-text
     prose-a:hover:text-sky"
   >
     <h1
-      class="mb-6 mt-10 text-2xl font-extrabold md:mr-6 md:text-4xl text-text"
+      class="not-prose mb-2 mt-10 text-2xl highlight-text font-extrabold md:mr-6 md:text-4xl"
     >
       {post.data.title}
     </h1>
+    <div>
+      <time datetime={post.data.date} class="text-subtext1">
+        {
+          new Date(post.data.pubDate).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
+      </time>
+    </div>
 
     <div class="font-serif">
       <slot />

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .highlight-text {
+    @apply from-pink;
+    @apply to-mauve;
+    @apply text-transparent;
+    @apply bg-clip-text;
+    @apply bg-gradient-to-r;
+  }
+}

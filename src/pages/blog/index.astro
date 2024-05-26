@@ -8,43 +8,35 @@ const allPosts = await getCollection("blog");
 ---
 
 <BaseLayout title={title}>
-  <div class="p-3 w-3/4 mx-auto text-text">
-    <h1 class="text-3xl font-bold">Blog</h1>
-    <hr class="mt-2 text-sky" />
-    <div class="w-100 flex flex-col gap-10 mt-10 justify-center">
+  <div class="p-10 w-3/4 mx-auto text-text">
+    <h1 class="text-3xl font-bold">Latest posts</h1>
+    <div class="w-100 flex flex-col gap-10 mt-4 justify-center">
       {
         allPosts.map((post, index) => {
           const href = `/blog/${post.slug}`;
           return (
-            <a href={href}>
-              <div class="bg-surface1 p-8 rounded-xl  cursor-pointer border-5 border-sky">
-                <div class="post-item">
-                  <h2>{post.data.title}</h2>
-                  <p>{post.data.description}</p>
-                  <div class="post-item-footer">
-                    <span class="post-item-date">— {post.data.pubDate}</span>
-                  </div>
+            <div class="cursor-pointer">
+              <div class="post-item">
+                <a href={href} class="hover:highlight-text">
+                  <h2 class="text-subtext1 text-2xl ">{post.data.title}</h2>
+                </a>
+                <div class="text-sky flex gap-4">
+                  <time datetime={post.data.pubDate.toString()} class="">
+                    {new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  <span>10 min read</span>
+                  <span>50 views</span>
                 </div>
+                <p class="text-text mt-2">{post.data.description}</p>
               </div>
-            </a>
+            </div>
           );
         })
       }
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  h2,
-  .post-item-footer {
-    font-family: var(--font-family-sans);
-    font-weight: 700;
-  }
-
-  .post-item-date {
-    color: var(--text-secondary);
-    text-align: left;
-    text-transform: uppercase;
-    margin-right: 16px;
-  }
-</style>

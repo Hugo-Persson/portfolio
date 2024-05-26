@@ -1,0 +1,14 @@
+---
+const currentPath = Astro.url.pathname; // e.g. "/blog/post-1"
+const headerLinks = [
+  { href: "/", text: "1. About me" },
+  { href: "/blog", text: "2. Blog" },
+];
+---
+
+<header class="flex justify-between align-middle font-bold text-xl">
+  {currentPath === "/" ? <h1 /> : <a class="text-text" href="/">Hugo Persson</a>}
+  <div class="gap-8 flex">
+    {headerLinks.map((link) => <a class=`${currentPath == link.href ? "highlight-text" : "text-text"}` href={link.href}>{link.text}</a>)}
+  </div>
+</header>

@@ -1,7 +1,10 @@
 ---
+import "@styles/tailwind.css";
 import "@fontsource-variable/jetbrains-mono";
 import ThemeHeadScript from "./theme-head-script.astro";
 import ThemeToggle from "../components/theme-toggle.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 interface Props {
   title: string;
 }
@@ -28,17 +31,13 @@ const headerLinks = [
 
   <body class="">
     <div class="p-4 min-h-screen bg-base flex flex-col">
-      <header
-        class="flex justify-end gap-8 align-middle text-text font-bold text-xl"
-      >
-        {headerLinks.map((link) => <a href={link.href}>{link.text}</a>)}
-        <ThemeToggle />
-      </header>
+      <Header />
       <slot />
     </div>
     <style is:global>
       code {
         font-family:
+          "JetBrains Mono Variable",
           Menlo,
           Monaco,
           Lucida Console,
