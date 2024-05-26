@@ -4,9 +4,9 @@ const { post } = Astro.props;
 ---
 
 <Layout title={post.data.title}>
-  <div class=""></div>
   <article
-    class="max-w-[90rem] mx-auto flex-none prose prose-h1:text-text
+    class="prose prose-h1:text-text mx-auto
+    font-sans
     prose-code:text-mauve
     prose-strong:text-sky
     prose-blockquote:bg-mantle prose-blockquote:border-l-mauve prose-blockquote:text-text
@@ -20,8 +20,8 @@ const { post } = Astro.props;
       {post.data.title}
     </h1>
 
-    <main class="rounded-lg bg-crust text-text p-5">
+    <div class="font-serif">
       <slot />
-    </main>
+    </div>
   </article>
 </Layout>
