@@ -8,6 +8,7 @@ const postsCollection = defineCollection({
     pubDate: z.date(),
     description: z.string(),
     tags: z.array(z.string()),
+    draft: z.boolean(),
   }),
 });
 // Export a single `collections` object to register your collection(s)

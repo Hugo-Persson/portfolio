@@ -1,6 +1,14 @@
 ---
 import Layout from "./Layout.astro";
-const { post } = Astro.props;
+interface Post {
+  data: {
+    title: string;
+    date: string;
+    pubDate: string;
+    description: string;
+  };
+}
+const post: Post = Astro.props.post as Post;
 ---
 
 <Layout title={post.data.title}>
@@ -31,6 +39,10 @@ const { post } = Astro.props;
         }
       </time>
     </div>
+    <h2>Summary</h2>
+    <p>
+      {post.data.description}
+    </p>
 
     <div class="font-serif">
       <slot />
