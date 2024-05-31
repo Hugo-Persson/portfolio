@@ -1,18 +1,17 @@
 ---
-title: "Publish a Rust App with GitHub Actions"
-description: "In this guide, I'll show you how to publish an existing Rust app to GitHub using GitHub Actions. "
-pubDate: 2024-05-24
+title: "Publish a Rust CLI App with GitHub Actions"
+description: "How to create a GitHub Actions workflow to automatically build a Rust app. Create a GitHub release and attach the binary to it for all platforms. For example if you have a Rust CLI app that you want to publish the binaries to GitHub so people can download your tools, this is how to do it."
+pubDate: 2024-05-31
 tags: ["rust", "github-actions", "ci/cd", "cargo"]
-draft: true
+keywords: []
+draft: false
 ---
 
 ## Overview
 
-We are gooing to create a Github Actions workflow to automaticly build our Rust app. Create a github release and attach the binary to it for all platforms. This will be run automatically on every push to the main branch.
+## Prerequisites
 
-## Preqrequisites
-
-## Github Actions Workflow
+## GitHub Actions Workflow
 
 ### Configure when to run
 
@@ -30,10 +29,20 @@ permissions:
   contents: write
 ```
 
-With this we will automaticly trigger the workflow when we push a tag
-with name like `1.0.0, 1.0.1, 1.1.2` etc.
+With this we will automatically trigger the workflow when we push a tag
+with name like `1.0.0, 1.0.1, 1.1.2` etc. Replace the `<REPLACE>` with the name of your project. You will find this in your `cargo.toml` file under `bin`, something like this:
 
-### Configure rust toolchain
+```toml
+[[bin]]
+name = "<YOUR_PROJECT_NAME>"
+```
+
+### Configure rust tool chain
+
+We now want to set up a job that will compile our Rust app.
+We do this by utilizing a matrix strategy,
+you can read more about this here:
+<https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs>
 
 ```yaml
 jobs:
@@ -74,7 +83,12 @@ jobs:
         run: cargo build --verbose --locked --release --target ${{ matrix.target }}
 ```
 
+We will now have the environment setup for each platform to be able to compile our Rust app.
+
 ### Build and attach the Binary to the Release
+
+Now we want to actually compile the binary and attach it to the release.
+We can do this as follows:
 
 ```yaml
 - name: Build Binary
@@ -109,16 +123,18 @@ jobs:
 
 ### Create a Release
 
+The last step is to actually publish the release with the binary files attached.
+
 ```yaml
 - name: Release
   uses: softprops/action-gh-release@v1
   with:
-    files: ${{ env.ASSET }}
+    files: ${{ env.ASSET }} # Attach the binary to the release
 ```
 
 ## Summary
 
-Here is the workflow we created:
+Here is the workflow we created, you can also see how I use this in my Open Source DNS CLI tool, [dns-cli](https://github.com/Hugo-Persson/dns-cli-tools)
 
 ```yaml
 name: Deploy

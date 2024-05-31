@@ -3,6 +3,7 @@ title: "Wireguard with DNS in Docker"
 description: "In this guide, I'll show you how I set up a Wireguard server and a DNS server on the same host in my HomeLab. Many users face issues using a local DNS server with Wireguard. I'll explain how to configure Wireguard to access local devices and use a local DNS server like AdGuard Home, with both running in Docker on the same machine."
 pubDate: 2024-05-24
 tags: ["wireguard", "docker", "dns"]
+keywords: []
 draft: false
 ---
 
