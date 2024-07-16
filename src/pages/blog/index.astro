@@ -8,7 +8,7 @@ const allPosts = (await getCollection("blog")).filter((e) => !e.data.draft);
 ---
 
 <BaseLayout title={title}>
-  <div class="p-10 w-3/4 mx-auto text-text">
+  <div class="p-10 w-3/4 max-w-6xl mx-auto text-text">
     <h1 class="text-3xl font-bold">Latest posts</h1>
     <div class="w-100 flex flex-col gap-10 mt-4 justify-center">
       {
