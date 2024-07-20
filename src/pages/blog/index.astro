@@ -1,10 +1,21 @@
 ---
 import BaseLayout from "../../layouts/Layout.astro";
+import BlogPost from "@components/BlogPost.astro";
 import { getCollection } from "astro:content";
 const title = "Blog";
 const description = "Latest articles.";
 
-const allPosts = (await getCollection("blog")).filter((e) => !e.data.draft);
+const allPostsPromise = (await getCollection("blog"))
+  .filter((e) => !e.data.draft)
+  .map(async (e) => {
+    const { Content, remarkPluginFrontmatter } = await e.render();
+    return {
+      slug: e.slug,
+      data: e.data,
+      minutesRead: remarkPluginFrontmatter.minutesRead as string,
+    };
+  });
+const allPosts = await Promise.all(allPostsPromise);
 ---
 
 <BaseLayout title={title}>
@@ -12,30 +23,14 @@ const allPosts = (await getCollection("blog")).filter((e) => !e.data.draft);
     <h1 class="text-3xl font-bold">Latest posts</h1>
     <div class="w-100 flex flex-col gap-10 mt-4 justify-center">
       {
-        allPosts.map((post, index) => {
-          const href = `/blog/${post.slug}`;
-          return (
-            <div class="cursor-pointer">
-              <div class="post-item">
-                <a href={href} class="hover:highlight-text">
-                  <h2 class="text-subtext1 text-2xl ">{post.data.title}</h2>
-                </a>
-                <div class="text-sky flex gap-4">
-                  <time datetime={post.data.pubDate.toString()} class="">
-                    {new Date(post.data.pubDate).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </time>
-                  <span>10 min read</span>
-                  <span>50 views</span>
-                </div>
-                <p class="text-text mt-2">{post.data.description}</p>
-              </div>
-            </div>
-          );
-        })
+        allPosts.map((post, _) => (
+          <BlogPost
+            slug={post.slug}
+            minutesRead={post.minutesRead}
+            post={post.data}
+            cover={post.data.cover}
+          />
+        ))
       }
     </div>
   </div>

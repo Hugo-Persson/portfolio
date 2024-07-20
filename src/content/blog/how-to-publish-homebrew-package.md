@@ -12,7 +12,9 @@ tags:
   - cli
 keywords: []
 draft: false
+cover: ./images/publish-to-homebrew.png
 ---
+
 ## Setting up a tap
 
 The first thing we need to do is to create a tap.
@@ -47,7 +49,7 @@ In your tap folder you should have the following structure:
 ```
 
 ## Creating a Formula
->
+
 > For this step you need to have a compiled binary of your CLI app published on GitHub Releases. For a guide how to do this in Rust, see my post [Publish a Rust CLI App with GitHub Actions](/blog/publish-cargo-app-with-github-actions/). A simliar setup can be used for other languages.
 
 We will now create a new Formula in the Formula folder.
@@ -166,4 +168,3 @@ After this you can install your CLI app by running:
 brew tap <YOUR_GITHUB_USERNAME>/<YOUR_TAP_NAME>
 brew install <YOUR_GITHUB_USERNAME>/<YOUR_TAP_NAME>/<YOUR_FORMULA>
 ```
-

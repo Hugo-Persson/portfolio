@@ -5,6 +5,7 @@ pubDate: 2024-05-31
 tags: ["rust", "github-actions", "ci/cd", "cargo"]
 keywords: []
 draft: false
+cover: ./images/rust.png
 ---
 
 ## Overview
