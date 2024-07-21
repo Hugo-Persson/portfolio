@@ -1,0 +1,3 @@
+.article-list-post:hover h3 {
+  @apply highlight-text;
+}
