@@ -36,11 +36,9 @@ const href = `/blog/${slug}`;
           class="my-1 flex flex-wrap text-xs leading-relaxed text-neutral-500 dark:text-neutral-400"
         >
           {
-            post.tags.map((tag) => {
+            post.tags.map((tag: string) => {
               return (
-                <span
-                  class="mx-1 my-1 rounded-md border border-neutral-200 px-1 py-[1px] hover:border-primary-300 hover:text-primary-700 dark:border-neutral-600 dark:hover:border-primary-600 dark:hover:text-primary-400"
-                >
+                <span class="mx-1 my-1 rounded-md border border-neutral-200 px-1 py-[1px] hover:border-primary-300 hover:text-primary-700 dark:border-neutral-600 dark:hover:border-primary-600 dark:hover:text-primary-400">
                   {tag}
                 </span>
               );
