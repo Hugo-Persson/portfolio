@@ -2,18 +2,12 @@
 import "@styles/tailwind.css";
 import "@fontsource-variable/jetbrains-mono";
 import ThemeHeadScript from "./theme-head-script.astro";
-import ThemeToggle from "../components/theme-toggle.astro";
 import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-const headerLinks = [
-  { href: "/", text: "1. About me" },
-  { href: "/blog", text: "2. Blog" },
-];
 ---
 
 <!doctype html>

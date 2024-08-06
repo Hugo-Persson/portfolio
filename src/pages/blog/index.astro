@@ -4,12 +4,11 @@ import "@styles/blog-list.css";
 import BlogPost from "@components/BlogPost.astro";
 import { getCollection } from "astro:content";
 const title = "Blog";
-const description = "Latest articles.";
 
 const allPostsPromise = (await getCollection("blog"))
   .filter((e) => !e.data.draft)
   .map(async (e) => {
-    const { Content, remarkPluginFrontmatter } = await e.render();
+    const { remarkPluginFrontmatter } = await e.render();
     return {
       slug: e.slug,
       data: e.data,
