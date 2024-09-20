@@ -1,5 +1,6 @@
 ---
 import "@styles/tailwind.css";
+import "@styles/general.css";
 import "@fontsource-variable/jetbrains-mono";
 import ThemeHeadScript from "./theme-head-script.astro";
 import Header from "@components/Header.astro";
@@ -11,7 +12,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="latte">
   <head>
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta charset="UTF-8" />
@@ -24,7 +25,7 @@ const { title } = Astro.props;
   </head>
 
   <body class="">
-    <div class="p-4 min-h-screen bg-base flex flex-col">
+    <div class="min-h-screen bg-base flex flex-col">
       <Header />
       <slot />
     </div>

@@ -1,15 +1,17 @@
 ---
 const currentPath = Astro.url.pathname; // e.g. "/blog/post-1"
 const headerLinks = [
-  { href: "/", text: "1. About me" },
-  { href: "/projects", text: "2. Projects" },
-  { href: "/blog", text: "3. Blog" },
+  { href: "/", text: "About me" },
+{ href: "/experience", text: "Experience" },
+  { href: "/projects", text: "Projects" },
+  { href: "/uses", text: "Uses" },
+  { href: "/blog", text: "Blog" },
 ];
 ---
 
-<header class="flex justify-between align-middle font-bold text-xl">
+<header class="flex justify-between align-middle font-bold text-xl px-4 pt-4">
   {currentPath === "/" ? <h1 /> : <a class="text-text" href="/">Hugo Persson</a>}
   <div class="gap-8 flex">
-    {headerLinks.map((link) => <a class=`${currentPath == link.href ? "highlight-text" : "text-text"}` href={link.href}>{link.text}</a>)}
+{headerLinks.map((link, index) => <a class=`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}` href={link.href}>{index}. {link.text}</a>)}
   </div>
 </header>

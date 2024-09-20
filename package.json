@@ -37,8 +37,10 @@
     }
   },
   "devDependencies": {
+    "@catppuccin/daisyui": "^1.1.2",
     "@catppuccin/tailwindcss": "^0.1.6",
     "@tailwindcss/typography": "^0.5.13",
+    "daisyui": "^4.12.10",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0"
   }

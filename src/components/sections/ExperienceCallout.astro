@@ -1,0 +1,30 @@
+---
+import { ArrowRight } from "lucide-astro";
+interface Props {
+  skill: string;
+}
+const { skill }: Props = Astro.props;
+---
+
+<div
+  data-tip="Click to see related projects"
+  class="tooltip
+  bg-surface0
+  text-text
+  h-auto
+  inline-block
+    px-4 py-2 mr-2 mt-2 rounded-lg
+    font-semibold
+    transition-all duration-300 ease-in-out
+    shadow-sm
+   
+    md:hover:border-gray-400 md:hover:dark:border-red-900
+  hover:shadow-lg
+  hover:text-sky
+    cursor-pointer"
+>
+  <div class="flex items-center justify-between space-x-2">
+    <span>{skill}</span>
+    <ArrowRight />
+  </div>
+</div>

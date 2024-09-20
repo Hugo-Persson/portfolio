@@ -1,4 +1,5 @@
 ---
+import { proseClasses } from "@root/constants";
 import Layout from "./Layout.astro";
 interface Post {
   data: {
@@ -12,17 +13,7 @@ const post: Post = Astro.props.post as Post;
 ---
 
 <Layout title={post.data.title}>
-  <article
-    class="prose prose-h1:text-text mx-auto
-    font-sans
-    prose-code:text-mauve
-    prose-strong:text-sky
-    prose-blockquote:bg-mantle prose-blockquote:border-l-mauve prose-blockquote:text-text
-    prose-h2:text-subtext0 prose-h3:text-subtext1
-    prose-a:text-blue
-    prose-p:text-text
-    prose-a:hover:text-sky"
-  >
+  <article class={proseClasses}>
     <h1
       class="not-prose mb-2 mt-10 text-2xl highlight-text font-extrabold md:mr-6 md:text-4xl"
     >

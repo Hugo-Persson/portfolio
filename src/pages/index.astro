@@ -2,6 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import Dash from "../components/Dash.astro";
+import IconLink from "../components/IconLink.astro";
+import AboutMe from "../components/sections/AboutMe.astro";
+import ReadMoreArrow from "../components/ReadMoreArrow.astro";
+import Footer from "../components/Footer.astro";
 import lissabonHugo from "../images/lissabon-cropped.jpg";
 import { Linkedin, Github, Mail, FileText } from "lucide-astro";
 const iconClasses = "w-16 h-16  text-sky";
@@ -11,40 +15,45 @@ const subHeadlineSize = "text-6xl mb-2";
 
 <Layout title="Hugo Persson">
   <main class="bg-base p-10 flex flex-col grow">
-    <div class="flex grow align-middle mb-[10%]">
-      <div class="w-1/2 self-center">
-        <h1 class={` text-lavender text-9xl mb-5`}>Hugo Persson</h1>
-        <h2 class={`${subHeadlineSize} text-sapphire`}>Software Engineer</h2>
-        <h2 class={`${subHeadlineSize} text-sky `}>Freelancer</h2>
-        <h2 class={`${subHeadlineSize} text-teal `}>Student</h2>
+    <div class="h-[88vh] mb-5 flex flex-col justify-between">
+      <div class="flex grow align-middle mb-[10%]">
+        <div class="w-1/2 self-center">
+          <h1 class={` text-lavender text-9xl mb-5`}>Hugo Persson</h1>
+          <h2 class={`${subHeadlineSize} text-sapphire`}>Software Engineer</h2>
+          <h2 class={`${subHeadlineSize} text-sky `}>Freelancer</h2>
+          <h2 class={`${subHeadlineSize} text-teal `}>Student</h2>
+        </div>
+        <div class="w-1/2 flex justify-center align-middle">
+          <Image
+            src={lissabonHugo}
+            alt="Hugo Persson"
+            class="w-[55%] self-center bg-surface1 rounded-[70px]"
+          />
+        </div>
       </div>
-      <div class="w-1/2 flex justify-center align-middle">
-        <Image
-          src={lissabonHugo}
-          alt="Hugo Persson"
-          class="w-[55%] self-center bg-surface1 rounded-[70px]"
-        />
-      </div>
-    </div>
-    <div class="flex w-full align-middle justify-between">
-      <Dash />
-      <div class="flex gap-4">
-        <a target="_blank" href="https://github.com/Hugo-Persson">
-          <Github stroke-width={strokeWidth} class={iconClasses} />
-        </a>
-        <a
-          target="_blank"
-          href="https://www.linkedin.com/in/hugo-persson-3ab782211/"
-        >
-          <Linkedin stroke-width={strokeWidth} class={iconClasses} />
-        </a>
-        <a target="_blank" href="mailto:hugo.e.persson@gmail.com">
-          <Mail stroke-width={strokeWidth} class={iconClasses} />
-        </a>
+      <div>
+        <div class="flex w-full align-middle justify-between">
+          <Dash />
+          <div class="flex gap-4">
+            <IconLink href="https://github.com/Hugo-Persson">
+              <Github stroke-width={strokeWidth} class={iconClasses} />
+            </IconLink>
+            <IconLink
+              href="https://www.linkedin.com/in/hugo-persson-3ab782211/"
+            >
+              <Linkedin stroke-width={strokeWidth} class={iconClasses} />
+            </IconLink>
+            <IconLink href="mailto:hugo.e.persson@gmail.com">
+              <Mail stroke-width={strokeWidth} class={iconClasses} />
+            </IconLink>
 
-        <FileText stroke-width={strokeWidth} class={iconClasses} />
+            <FileText stroke-width={strokeWidth} class={iconClasses} />
+          </div>
+          <Dash />
+        </div>
+        <ReadMoreArrow href="#aboutMe" class="text-sky mt-4" />
       </div>
-      <Dash />
     </div>
+    <AboutMe />
   </main>
 </Layout>
