@@ -13,7 +13,7 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: ./cv/main.tex
+          root_file: ./cv/mmayer.tex
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
