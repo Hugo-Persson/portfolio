@@ -1,0 +1,21 @@
+---
+interface Props {
+  schoolName: string;
+  educationName: string;
+  description: string;
+  image: any;
+}
+const { schoolName, educationName, description, image } = Astro.props;
+import { Image } from "astro:assets";
+---
+
+<div class="card card-side bg-base-100 shadow-xl">
+  <figure class="p-0 m-0 w-1/3">
+    <Image src={image} alt="Lund University" class="rounded-lg" />
+  </figure>
+  <div class="card-body w-2/3">
+    <h2 class="card-title">{schoolName}</h2>
+    <h3 class="card-subtitle">{educationName}</h3>
+    <p>{description}</p>
+  </div>
+</div>

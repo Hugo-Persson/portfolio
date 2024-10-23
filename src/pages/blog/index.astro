@@ -15,7 +15,12 @@ const allPostsPromise = (await getCollection("blog"))
       minutesRead: remarkPluginFrontmatter.minutesRead as string,
     };
   });
-const allPosts = await Promise.all(allPostsPromise);
+const allPosts = await Promise.all(allPostsPromise).then((e) =>
+  e.sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+  ),
+);
 ---
 
 <BaseLayout title={title}>
