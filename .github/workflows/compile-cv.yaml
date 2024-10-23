@@ -15,8 +15,17 @@ jobs:
         with:
           working_directory: ./cv
           root_file: ./mmayer.tex
-      - name: Upload PDF file
-        uses: actions/upload-artifact@v4
-        with:
-          name: PDF
-          path: ./cv/mmayer.pdf
+      - name: Move PDF file
+        run: mv ./cv/mmayer.pdf ./public/cv.pdf
+      - name: Configure git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Add and commit the new file
+        run: |
+          git add ./public/cv.pdf
+          git commit -m "Update cv.pdf"
+      - name: Push changes
+        run: git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
