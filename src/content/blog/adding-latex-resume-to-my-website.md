@@ -1,9 +1,7 @@
 ---
-title: How I wrote and published my resume as PDF to my website
+title: My Resume as a PDF to My Website Using LaTeX and GitHub Actions
 description: >-
-  A quick showcase of how I created my resume in Latex. 
-  I will show of my Latex workflow on my mac and how I added this resume to my website. 
-  I will show how I auto compile and publish the resume as a PDF with github actions
+  A step-by-step guide on how I used LaTeX to create my resume and automated its publication to my website as a PDF using GitHub Actions. This article outlines my workflow on macOS, from creating the resume to deploying it automatically.
 pubDate: 2024-10-25T00:00:00.000Z
 tags:
   - latex
@@ -15,13 +13,12 @@ cover: ./images/publish-to-homebrew.png
 
 ## Goals
 
-The main goal of the resume is to condense my personal website [hugopersson.com](https://hugopersson.com) to a one page PDF document. Many recruiters prefer this to get a quick overview of what I have to offer.
-It is also required for general job applications. So my goal was to create a setup that covers these requirements
+My primary goal was to transform my personal website, [hugopersson.com](https://hugopersson.com) into a concise one-page PDF resume. Many recruiters prefer a single-page format to quickly assess candidates, and having an up-to-date resume is essential for general job applications. To meet these needs, I aimed to establish a setup that ensures:
 
-- Easy to edit and maintain
-- Creates one page PDF file
-- Local development
-- Plain text
+- Easy maintenance and updates
+- A single-page PDF format
+- Local development options
+- Plain text editing
 - Summarizes:
   - Experience
   - Education
@@ -30,13 +27,9 @@ It is also required for general job applications. So my goal was to create a set
 
 ## Solution
 
-To do this I chose to use Latex to write my CV. This allows me to have a lot of customization options and being able to truly fit my use case, something I couldn't do with for example markdown.
-Latex allows me to write in plain text in my editor of choice. I also have the ability to create abstractions to avoid duplication of formatting.
+To achieve this, I chose LaTeX for creating my resume. LaTeX provides extensive customization options, allowing me to tailor the document to my specific needs—something that simpler formats like Markdown cannot offer. Additionally, LaTeX enables me to write in plain text, which I can easily edit in any text editor. I also have the flexibility to create reusable components, reducing repetitive formatting.
 
-To integrate with my website I decided to use GitHub Actions to automaticly compile the Latex to a PDF file and push it to the GitHub repository
-for my website that will later be deployed automaticly to Cloudflare pages.
-This ensures my website to always be up to date and allows me to quickly to quickly make edits to my resume without needing to locally compile.
-for example I can open GitHub web editor change a small section then commit+push directly in my browser and this being reflected on my website.
+For seamless integration with my website, I set up GitHub Actions to automatically compile my LaTeX file into a PDF and deploy it to my site. The process involves pushing updates to my GitHub repository, which triggers an automated build and deployment to Cloudflare Pages. This setup ensures that my website always displays the latest version of my resume, allowing me to make quick edits directly on GitHub without needing a local compile. For example, I can open the GitHub web editor, adjust a section, commit, and see the changes reflected on my website.
 
 ## Creating LaTEX document
 
@@ -46,7 +39,7 @@ I downloaded the Source Code and created a new directory `resume` in the root of
 
 ## Publishing
 
-To publish I setup this github actions
+To automate the publishing process, I configured the following GitHub Actions workflow:
 
 ```yml
 name: Build LaTeX document
@@ -82,7 +75,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Then I added a link to the resume on the index of my website next to all the other links
+This action is triggered whenever I push changes to files within the cv directory. The workflow compiles the LaTeX document, moves the generated PDF to the public directory, commits the new version, and pushes it to my repository. The updated PDF is then deployed to Cloudflare Pages, keeping the resume on my website current.
+
+Finally, I added a link to the resume on the main page of my website. This link is placed alongside other links in my site’s navigation, making it easy for visitors to find.
 
 ```astro
 <IconLink href="/cv.pdf">
@@ -92,4 +87,4 @@ Then I added a link to the resume on the index of my website next to all the oth
 
 ## Result
 
-For the result you can find the resume at [hugopersson.com/cv.pdf](https://hugopersson.com/cv.pdf)
+The result is now live! You can view the resume at [hugopersson.com/cv.pdf](https://hugopersson.com/cv.pdf). This setup has made maintaining and sharing my resume straightforward, with updates reflected on my site almost instantly.
