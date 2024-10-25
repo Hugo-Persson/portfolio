@@ -13,10 +13,10 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
-          working_directory: ./cv
+          working_directory: ./resume
           root_file: ./mmayer.tex
-      - name: Move PDF file
-        run: mv ./cv/mmayer.pdf ./public/cv.pdf
+      - name: Move PDF file to public directory
+        run: mv ./resume/mmayer.pdf ./public/cv.pdf
       - name: Configure git user
         run: |
           git config --global user.name "github-actions[bot]"
