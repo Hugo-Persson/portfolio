@@ -9,9 +9,85 @@ const headerLinks = [
 ];
 ---
 
+
+<script>
+  const menuBtn = document.querySelector('#menu-btn');
+  const mobileMenu = document.querySelector('#mobile-menu');
+  
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('show');
+  });
+</script>
+
+<style>
+  @media (max-width: 768px) {
+    .desktop-menu {
+      display: none;
+    }
+    .mobile-menu-btn {
+      display: block;
+    }
+  }
+  @media (min-width: 769px) {
+    .mobile-menu-btn {
+      display: none;
+    }
+    #mobile-menu {
+      display: none !important;
+    }
+  }
+  
+  #mobile-menu {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  #mobile-menu.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+</style>
+
 <header class="flex justify-between align-middle font-bold text-xl px-4 pt-4">
   {currentPath === "/" ? <h1 /> : <a class="text-text" href="/">Hugo Persson</a>}
-  <div class="gap-8 flex">
-{headerLinks.map((link, index) => <a class=`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}` href={link.href}>{index}. {link.text}</a>)}
+  
+  <!-- Desktop Menu -->
+  <div class="gap-8 desktop-menu flex">
+    {headerLinks.map((link, index) => (
+      <a 
+        class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`} 
+        href={link.href}
+      >
+        {index}. {link.text}
+      </a>
+    ))}
   </div>
+
+  <!-- Mobile Menu Button -->
+  <button id="menu-btn" class="mobile-menu-btn text-text">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
 </header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed top-16 left-0 right-0 bg-base p-4 shadow-lg">
+  <div class="flex flex-col gap-4">
+    {headerLinks.map((link, index) => (
+      <a 
+        class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`}
+        href={link.href}
+      >
+        {index}. {link.text}
+      </a>
+    ))}
+  </div>
+</div>

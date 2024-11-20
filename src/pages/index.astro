@@ -8,26 +8,28 @@ import ReadMoreArrow from "../components/ReadMoreArrow.astro";
 import Footer from "../components/Footer.astro";
 import lissabonHugo from "../images/lissabon-cropped.jpg";
 import { Linkedin, Github, Mail, FileText } from "lucide-astro";
-const iconClasses = "w-16 h-16  text-sky";
+const iconClasses = "xl:w-16 xl:h-16 lg:w-14 lg:h-14 w-12 h-12  text-sky";
 const strokeWidth = 1;
-const subHeadlineSize = "text-6xl mb-2";
+const subHeadlineSize = "mb-2 xl:text-6xl lg:text-5xl text-4xl";
 ---
 
 <Layout title="Hugo Persson">
-  <main class="bg-base p-10 flex flex-col grow">
-    <div class="h-[88vh] mb-5 flex flex-col justify-between">
-      <div class="flex grow align-middle mb-[10%]">
-        <div class="w-1/2 self-center">
-          <h1 class={` text-lavender text-9xl mb-5`}>Hugo Persson</h1>
+  <main class="bg-base px-10 flex flex-col grow">
+    <div class="h-screen py-30 md:h-[calc(100vh-theme(spacing.20))] flex flex-col justify-between">
+      <div class="flex grow flex-col-reverse md:flex-row align-middle">
+        <div class="md:w-1/2 self-center text-center md:text-left mt-8 md:mt-0">
+          <h1 class="text-lavender text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-5">
+            Hugo Persson
+          </h1>
           <h2 class={`${subHeadlineSize} text-sapphire`}>Software Engineer</h2>
           <h2 class={`${subHeadlineSize} text-sky `}>Freelancer</h2>
           <h2 class={`${subHeadlineSize} text-teal `}>Student</h2>
         </div>
-        <div class="w-1/2 flex justify-center align-middle">
+        <div class="md:w-1/2 flex justify-center align-middle">
           <Image
             src={lissabonHugo}
             alt="Hugo Persson"
-            class="w-[55%] self-center bg-surface1 rounded-[70px]"
+            class="w-[60%] md:w-[45%] self-center bg-surface1 rounded-[70px]"
           />
         </div>
       </div>
@@ -52,7 +54,7 @@ const subHeadlineSize = "text-6xl mb-2";
           </div>
           <Dash />
         </div>
-        <ReadMoreArrow href="#aboutMe" class="text-sky mt-4" />
+        <ReadMoreArrow href="#aboutMe" class="text-sky mt-4 mb-2" />
       </div>
     </div>
     <AboutMe />
