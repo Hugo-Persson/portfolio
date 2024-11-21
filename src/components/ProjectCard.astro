@@ -3,12 +3,25 @@ interface Props {
     title: string;
     description: string;
     technologies: string[];
-    githubUrl?: string;
-    liveUrl?: string;
+    githubUrl: string;
+    slug: string;
     imageUrl?: string;
+    showStars?: boolean;
 }
 
-const { title, description, technologies, githubUrl, liveUrl, imageUrl } = Astro.props;
+const { title, description, technologies, githubUrl, slug, imageUrl, showStars = false } = Astro.props;
+
+let stars: number | null = null;
+if (showStars) {
+    try {
+        const repo = githubUrl.replace('https://github.com/', '');
+        const response = await fetch(`https://api.github.com/repos/${repo}`);
+        const data = await response.json();
+        stars = data.stargazers_count;
+    } catch (error) {
+        console.error('Error fetching GitHub stars:', error);
+    }
+}
 ---
 
 <div class="bg-surface p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
@@ -30,16 +43,36 @@ const { title, description, technologies, githubUrl, liveUrl, imageUrl } = Astro
         ))}
     </div>
     
-    <div class="flex gap-4">
-        {githubUrl && (
-            <a href={githubUrl} target="_blank" class="text-sky hover:text-purple transition-colors">
-                GitHub
-            </a>
-        )}
-        {liveUrl && (
-            <a href={liveUrl} target="_blank" class="text-sky hover:text-purple transition-colors">
-                Live Demo
-            </a>
-        )}
+    <div class="flex flex-wrap gap-4 items-center justify-between">
+        <a href={githubUrl} target="_blank" class="text-sky hover:text-purple transition-colors flex items-center gap-2">
+            GitHub
+            {showStars && stars !== null && (
+                <span class="flex items-center gap-1 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                    </svg>
+                    {stars}
+                </span>
+            )}
+        </a>
+        <a 
+            href={`/projects/${slug}`} 
+            class="text-sky hover:text-purple transition-colors flex items-center gap-1"
+        >
+            Read More
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+            >
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
     </div>
 </div> 
