@@ -2,21 +2,26 @@
 const currentPath = Astro.url.pathname; // e.g. "/blog/post-1"
 const headerLinks = [
   { href: "/", text: "About me" },
-{ href: "/experience", text: "Experience" },
+  { href: "/experience", text: "Experience" },
   { href: "/projects", text: "Projects" },
   { href: "/uses", text: "Uses" },
   { href: "/blog", text: "Blog" },
 ];
 ---
 
-
 <script>
-  const menuBtn = document.querySelector('#menu-btn');
-  const mobileMenu = document.querySelector('#mobile-menu');
-  
-  menuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('show');
-  });
+  const menuBtn = document.querySelector("#menu-btn");
+  const closeMenuBtn = document.querySelector("#close-menu-btn");
+  const mobileMenu = document.querySelector("#mobile-menu");
+  const body = document.body;
+
+  function toggleMenu() {
+    mobileMenu?.classList.toggle("show");
+    body.classList.toggle("menu-open");
+  }
+
+  menuBtn?.addEventListener("click", toggleMenu);
+  closeMenuBtn?.addEventListener("click", toggleMenu);
 </script>
 
 <style>
@@ -36,41 +41,71 @@ const headerLinks = [
       display: none !important;
     }
   }
-  
+
   #mobile-menu {
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition:
+      transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out,
+      visibility 0.3s ease-in-out;
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
   }
-  
+
   #mobile-menu.show {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
   }
+
+  /* Add styles for when menu is open */
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
 </style>
 
 <header class="flex justify-between align-middle font-bold text-xl px-4 pt-4">
-  {currentPath === "/" ? <h1 /> : <a class="text-text" href="/">Hugo Persson</a>}
-  
+  {
+    currentPath === "/" ? (
+      <h1 />
+    ) : (
+      <a class="text-text" href="/">
+        Hugo Persson
+      </a>
+    )
+  }
+
   <!-- Desktop Menu -->
   <div class="gap-8 desktop-menu flex">
-    {headerLinks.map((link, index) => (
-      <a 
-        class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`} 
-        href={link.href}
-      >
-        {index}. {link.text}
-      </a>
-    ))}
+    {
+      headerLinks.map((link, index) => (
+        <a
+          class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`}
+          href={link.href}
+        >
+          {index}. {link.text}
+        </a>
+      ))
+    }
   </div>
 
   <!-- Mobile Menu Button -->
   <button id="menu-btn" class="mobile-menu-btn text-text">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <line x1="3" y1="12" x2="21" y2="12"></line>
       <line x1="3" y1="6" x2="21" y2="6"></line>
       <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -79,15 +114,38 @@ const headerLinks = [
 </header>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed top-16 left-0 right-0 bg-base p-4 shadow-lg">
-  <div class="flex flex-col gap-4">
-    {headerLinks.map((link, index) => (
-      <a 
-        class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`}
-        href={link.href}
-      >
-        {index}. {link.text}
-      </a>
-    ))}
+<div
+  id="mobile-menu"
+  class="fixed bottom-0 z-50 top-0 left-0 right-0 bg-base p-4 shadow-lg"
+>
+  <!-- Add close button -->
+  <button id="close-menu-btn" class="absolute top-4 right-4 text-text">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <div class="flex flex-col gap-4 mt-12">
+    {
+      headerLinks.map((link, index) => (
+        <a
+          class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`}
+          href={link.href}
+        >
+          {index}. {link.text}
+        </a>
+      ))
+    }
   </div>
 </div>

@@ -10,26 +10,30 @@ import lissabonHugo from "../images/lissabon-cropped.jpg";
 import { Linkedin, Github, Mail, FileText } from "lucide-astro";
 const iconClasses = "xl:w-16 xl:h-16 lg:w-14 lg:h-14 w-12 h-12  text-sky";
 const strokeWidth = 1;
-const subHeadlineSize = "mb-2 xl:text-6xl lg:text-5xl text-4xl";
+const subHeadlineSize = "mb-2 xl:text-6xl lg:text-5xl md:text-4xl text-3xl";
 ---
 
 <Layout title="Hugo Persson">
-  <main class="bg-base px-10 flex flex-col grow">
-    <div class="h-screen py-30 md:h-[calc(100vh-theme(spacing.20))] flex flex-col justify-between">
-      <div class="flex grow flex-col-reverse md:flex-row align-middle">
+  <main class="bg-base px-10 flex flex-col grow pb-10">
+    <div class="min-h-[calc(100vh-8rem)] md:min-h-[calc(100vh-5rem)] flex flex-col justify-between">
+      <div
+        class="flex grow flex-col-reverse justify-end md:flex-row align-middle"
+      >
         <div class="md:w-1/2 self-center text-center md:text-left mt-8 md:mt-0">
-          <h1 class="text-lavender text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-5">
+          <h1 class="text-lavender text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-5">
             Hugo Persson
           </h1>
           <h2 class={`${subHeadlineSize} text-sapphire`}>Software Engineer</h2>
           <h2 class={`${subHeadlineSize} text-sky `}>Freelancer</h2>
           <h2 class={`${subHeadlineSize} text-teal `}>Student</h2>
         </div>
-        <div class="md:w-1/2 flex justify-center align-middle">
+        <div
+          class="md:w-1/2 flex flex-col md:flex-row justify-center align-middle"
+        >
           <Image
             src={lissabonHugo}
             alt="Hugo Persson"
-            class="w-[60%] md:w-[45%] self-center bg-surface1 rounded-[70px]"
+            class="w-[80%] sm:w-[70%] md:w-[45%] self-center bg-surface1 rounded-[70px]"
           />
         </div>
       </div>
@@ -54,9 +58,34 @@ const subHeadlineSize = "mb-2 xl:text-6xl lg:text-5xl text-4xl";
           </div>
           <Dash />
         </div>
-        <ReadMoreArrow href="#aboutMe" class="text-sky mt-4 mb-2" />
+        <ReadMoreArrow href="#aboutMe" 
+        
+        class="text-sky mt-4 mb-2 transition-opacity duration-500" />
       </div>
     </div>
     <AboutMe />
   </main>
 </Layout>
+
+<script>
+  // Existing height adjustment code...
+  
+  // Handle arrow visibility with fade effect
+  const observer = new IntersectionObserver((entries) => {
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    entries.forEach(entry => {
+      // If aboutMe section is visible, fade out the arrow, otherwise fade it in
+      scrollIndicator.style.opacity = entry.isIntersecting ? '0' : '1';
+      scrollIndicator.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+    });
+  }, {
+    threshold: 0.1, // Trigger when even 10% of the target is visible
+    rootMargin: '-50px' // Adds a small buffer before triggering
+  });
+
+  // Start observing the aboutMe section
+  const aboutMeSection = document.getElementById('aboutMe');
+  if (aboutMeSection) {
+    observer.observe(aboutMeSection);
+  }
+</script>

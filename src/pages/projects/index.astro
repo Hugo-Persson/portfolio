@@ -1,18 +1,27 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+
+// You can replace these with your actual projects
+const projects = [
+    {
+        title: "Personal Website",
+        description: "My personal portfolio website built with Astro, TailwindCSS, and TypeScript.",
+        technologies: ["Astro", "TailwindCSS", "TypeScript"],
+        githubUrl: "https://github.com/Hugo-Persson/portfolio",
+        liveUrl: "https://hugopersson.com",
+    },
+    // Add more projects here
+];
 ---
 
 <Layout title="Projects - Hugo Persson">
-  <div class="w-full h-full flex justify-center">
-    <div class="p-4 text-text text-center">
-      <h1 class="w-100 text-2xl font-bold mb-4">🚧 Under Construction 🚧</h1>
-      <p>I'm currently working on this page. Please check back later.</p>
-      <p>
-        In the meantime, you can check out my <a
-          class="text-sky hover:text-purple"
-          href="https://github.com/Hugo-Persson">GitHub</a
-        > profile.
-      </p>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-text mb-8">My Projects</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map(project => (
+                <ProjectCard {...project} />
+            ))}
+        </div>
     </div>
-  </div>
 </Layout>

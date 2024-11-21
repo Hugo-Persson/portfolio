@@ -10,11 +10,11 @@ const skills = Object.keys(Skills);
 ---
 
 <div
-  class=`${proseClasses} flex justify-between flex-col w-100 max-w-full h-[95vh] text-text`
+  class=`${proseClasses} flex justify-between flex-col w-100 max-w-full min-h-[calc(100vh-theme(spacing.20))] text-text`
   id="aboutMe"
 >
-  <div class="flex gap-10">
-    <div class="w-[60%] text-lg" >
+  <div class="flex flex-col md:flex-row md:gap-10">
+    <div class="w-full md:w-[60%] text-lg" >
       <Content/>
     </div>
     <div class="">
@@ -30,7 +30,7 @@ const skills = Object.keys(Skills);
   </div>
   <div class="w-full flex justify-center">
     <div
-      class="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0 w-full md:w-3/5 pt-2"
+      class="flex flex-col md:flex-row space-y-4 md:space-x-4 md:space-y-0 w-full md:w-3/5 pt-2 mt-8 md:mt-2"
     >
       <a class="w-full" href="/projects">
         <PrimaryButton>Projects</PrimaryButton>
