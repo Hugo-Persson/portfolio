@@ -29,6 +29,7 @@ export const proseClasses = `prose prose-h1:text-text mx-auto
     prose-p:text-text
     prose-a:hover:text-sky
     prose-ul:text-text
+    prose-ol:text-text
     marker:text-text
     li:text-text
 

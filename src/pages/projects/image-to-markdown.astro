@@ -1,9 +1,71 @@
 ---
 import ProjectLayout from "@layouts/ProjectLayout.astro";
 import UnderConstruction from "@components/UnderConstruction.astro";
+import demoGif from "@images/projects/image-to-markdown/demo.gif";
+import demoLight from "@images/projects/image-to-markdown/example-light.gif";
+import demoDark from "@images/projects/image-to-markdown/demo-dark.png";
+import { Image } from "astro:assets";
 ---
 
-<ProjectLayout name="OCR Latex">
-    <h1>OCR Latex</h1>
-    <UnderConstruction />
+<ProjectLayout name="Image to Markdown OCR">
+  <div class="prose max-w-none">
+    <h1>Image to Markdown OCR</h1>
+
+    <h2>About the Project</h2>
+    <p>
+      This tool converts images containing mathematical formulas or text into
+      Markdown or LaTeX format. It supports multiple OCR providers to give users
+      flexibility in their workflow:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Texify</strong> - A self-hosted service converting images to Markdown
+        (Recommended)
+      </li>
+      <li>
+        <strong>SimpleTex</strong> - A hosted service specializing in LaTeX conversion
+      </li>
+      <li>
+        <strong>pix2tex</strong> - A self-hosted alternative for LaTeX conversion
+      </li>
+    </ul>
+
+    <h2>How It Works</h2>
+    <div class="flex flex-col md:flex-row gap-8 align-middle">
+      <div class="md:w-1/2">
+        <p>The conversion process is straightforward:</p>
+        <ol>
+          <li>Capture an image or formula using screenshot</li>
+          <li>The image is processed through your chosen OCR provider</li>
+          <li>The result is returned as clean Markdown or LaTeX code</li>
+        </ol>
+      </div>
+      <div class="rounded-lg overflow-hidden shadow-lg p-4 md:w-1/2">
+        <Image
+          src={demoLight}
+          alt="Demo of Image to Markdown OCR conversion process"
+          class=""
+        />
+      </div>
+    </div>
+
+    <h2>Technology Stack</h2>
+    <p>This project leverages several powerful technologies and services:</p>
+    <ul>
+      <li>Node.js for backend processing</li>
+      <li>Docker support for containerization</li>
+      <li>Python-based OCR engines</li>
+      <li>RESTful APIs for service integration</li>
+    </ul>
+
+    <h2>Future Development</h2>
+    <p>Planned improvements include:</p>
+    <ul>
+      <li>Support for batch processing multiple images</li>
+      <li>Enhanced recognition accuracy</li>
+      <li>Additional output format options</li>
+      <li>Improved error handling and validation</li>
+    </ul>
+  </div>
 </ProjectLayout>
