@@ -5,7 +5,7 @@ pubDate: 2024-11-27
 tags: ["obsidian", "mac-tools"]
 keywords: []
 draft: false
-cover: ./images/clop+obsidian.png
+cover: ./images/obsidian-clop/obsidian+clop.png
 ---
 
 ## Why use Clop?
