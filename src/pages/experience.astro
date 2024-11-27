@@ -1,29 +1,27 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { Image } from "astro:assets";
 import UnderConstruction from "@components/UnderConstruction.astro";
 import EducationCard from "@components/experience/EducationCard.astro";
 import lundUniversity from "@images/lund_university.png";
 import ubc from "@images/ubc.png";
 ---
+
 <Layout title="Experience - Hugo Persson">
   <div class="prose mx-auto mt-20">
     <UnderConstruction />
     <EducationCard
       schoolName="Lund University"
       educationName="Master of Science and Engineering in Computer Science"
-
       description="I am currently studying my master in Computer Science at Lund University. I have taken courses in AI, Machine Learning, Software Engineering, Algorithms and Data Structures, Databases, Web Development, Computer Networks, Operating Systems, Computer Security, and more."
-image={lundUniversity}
+      image={lundUniversity}
     />
-schoolName
-<EducationCard
+    schoolName
+    <EducationCard
       schoolName="University of British Columbia"
       educationName="Exchange student in Computer Science"
-
       description="During the fall of 2024 I spent one term of my master at University of British Colombia where I studied AI, Machine Learning, Operating Systems and Business"
-image={ubc}
-/>
+      image={ubc}
+    />
     <h2>Education</h2>
     <h2>Work experience</h2>
   </div>
