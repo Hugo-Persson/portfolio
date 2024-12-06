@@ -106,7 +106,7 @@ This setup allows seamless switching between `pnpm dev` (online) and `pnpm dev:o
 Integrating Infisical with Docker for Next.js was more complex due to the need to inject secrets both at **build-time** and **runtime**. Here's how I tackled it:
 
 1. **Build Script**:  
-   A `build.sh` script fetches secrets and sets the appropriate environment based on the Git branch.
+    A `build.sh` script fetches secrets and sets the appropriate environment based on the Git branch.
 
    ```bash
    #!/bin/bash
@@ -114,6 +114,8 @@ Integrating Infisical with Docker for Next.js was more complex due to the need t
    INFISICAL_TOKEN=$(infisical login --client-id=$CLIENT_ID --client-secret=$CLIENT_SECRET --silent)
    docker build . --build-arg INFISICAL_TOKEN="$INFISICAL_TOKEN" --tag ...:"$CURRENT_BRANCH"
    ```
+
+   **Note**: We are not passing in the secrets directly, but rather a token. This token will expire meaning you cannot access our secret by inspecting the image, our image is private but it is still good practice.
 
 2. **Dockerfile**:  
    Secrets were injected using Infisical's CLI during the build process:
