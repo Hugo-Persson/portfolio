@@ -8,7 +8,7 @@ tags:
   - github-actions
 keywords: []
 draft: false
-cover: ./images/publish-to-homebrew.png
+cover: ./images/cv-workflow.png
 ---
 
 ## Goals
