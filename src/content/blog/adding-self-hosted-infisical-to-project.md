@@ -81,25 +81,17 @@ Setting up Infisical locally was straightforward:
    infisical init
    ```
 
-Secrets could then be used in two ways:
+Secrets could then be used like this:
 
 - Injected directly:
   ```bash
   infisical run -- pnpm dev
   ```
-- Exported to a `.env` file:
-  ```bash
-  infisical export > .env && pnpm dev
-  ```
-
-I chose the `.env` approach for offline functionality. My `package.json` included scripts for both modes:
+  I added a script in my `package.json` to fetch secrets and start the development server:
 
 ```json
-"dev:offline": "next dev",
-"dev": "infisical export > .env && next dev",
+"dev": "infisical run -- next dev",
 ```
-
-This setup allows seamless switching between `pnpm dev` (online) and `pnpm dev:offline` (offline).
 
 ### Docker Setup
 
