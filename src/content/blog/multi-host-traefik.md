@@ -216,3 +216,7 @@ providers:
 ## Conclusion
 
 With this setup, any changes to `config.toml` are automatically validated, built, deployed, and reflected in Traefik’s configuration. Notifications are sent to Discord, keeping me informed every step of the way.
+
+### Future improvements
+
+- Generate UFW rules for the services.
