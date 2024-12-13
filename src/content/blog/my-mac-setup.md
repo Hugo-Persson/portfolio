@@ -13,6 +13,5 @@ cover: ./images/traefik-multi-host.png
 - Obsidian
 - Raycast
 - Ice
-- Bartener
 - Proton pass
--
+  -Bruno
