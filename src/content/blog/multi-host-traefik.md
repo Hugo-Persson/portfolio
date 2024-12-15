@@ -220,3 +220,4 @@ With this setup, any changes to `config.toml` are automatically validated, built
 ### Future improvements
 
 - Generate UFW rules for the services.
+- Integrate with [DNS-Cli-Tools](https://github.com/Hugo-Persson/homebrew-dns-cli-tools)
