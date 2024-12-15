@@ -11,3 +11,5 @@ cover: ./images/traefik-multi-host.png
 - Edit compose in webui and create commit
 - Build jobs
 - scripting
+
+Note: Volume paths need to be absolute
