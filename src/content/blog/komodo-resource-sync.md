@@ -84,6 +84,42 @@ To trigger synchronization automatically on push, follow these steps:
 
 Now, whenever you push changes to your Git repository, they’ll be automatically deployed to Komodo.
 
+### Pre Push Hook
+
+The current workflow is great but has one major flaw. If I push something while having uncommited changes in the UI I will lose my UI changes. To avoid this, I created a pre-push hook that checks if there are any uncommited changes in the UI. If there are, the push will be aborted. I used the amazing Ko
+
+```ts
+import { KomodoClient, Types } from "komodo_client";
+import "dotenv/config";
+import { exit } from "process";
+
+async function main() {
+  const komodo = KomodoClient("https://komodo.evercode.se", {
+    type: "api-key",
+    params: {
+      key: process.env.API_KEY!,
+      secret: process.env.API_SECRET!,
+    },
+  });
+  try {
+    const id = "komodo-resource-sync";
+    const res = await komodo.write("RefreshResourceSyncPending", {
+      sync: id,
+    });
+    const updates = res.info?.resource_updates ?? [];
+    if (updates.length > 0) {
+      console.error("Updates are pending", updates);
+      exit(1);
+    }
+    exit(0);
+  } catch (e) {
+    console.log("error", e);
+    exit(1);
+  }
+}
+main();
+```
+
 ---
 
 ## Storing UI Changes in the Git Repository
@@ -91,9 +127,13 @@ Now, whenever you push changes to your Git repository, they’ll be automaticall
 If you make changes in the Komodo UI, you can easily store these updates in your Git repository. To do this:
 
 1. Navigate to the Resource Sync in Komodo.
-2. Click **Commit Changes**.  
+2. Click **Commit Changes**.
    This will create a commit with the current state of the Komodo instance and push it to your Git repository.
 
 ---
 
 By combining the intuitive UI of Komodo with the power of Git-based Resource Syncs, I’ve achieved a seamless and replicable HomeLab setup. I hope this guide helps you get started with your own setup!
+
+```
+
+```

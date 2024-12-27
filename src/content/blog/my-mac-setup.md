@@ -16,3 +16,7 @@ cover: ./images/traefik-multi-host.png
 - Proton pass
   -Bruno
 - Command X
+- Pear cleaner
+- Downie
+- Dropshelf
+- Copilot for xcode
