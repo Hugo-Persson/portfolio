@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "cv/**"
+      - "resume/**"
 jobs:
   build_latex:
     runs-on: ubuntu-latest
