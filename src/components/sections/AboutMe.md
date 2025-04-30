@@ -16,4 +16,3 @@ I also love building side projects and contributing to open-source communities. 
 - ⚡ Embedded systems development
 - 🏠 IOT and smart home projects
 
-Right now, my main focus is building an AI-powered audiobook app, which you can read more about [here](/projects/audiobook-app).

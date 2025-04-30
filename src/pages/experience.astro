@@ -1,28 +1,57 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import UnderConstruction from "@components/UnderConstruction.astro";
 import EducationCard from "@components/experience/EducationCard.astro";
+import WorkExperienceCard from "@components/experience/WorkExperienceCard.astro";
 import lundUniversity from "@images/lund_university.png";
 import ubc from "@images/ubc.png";
+import ericsson from "@images/ericsson.png";
+import axis from "@images/axis.png";
+import combain from "@images/combain-icon.png";
+import recruto from "@images/recruto.webp";
 ---
 
 <Layout title="Experience - Hugo Persson">
-  <div class="prose mx-auto mt-20">
-    <UnderConstruction />
-    <EducationCard
-      schoolName="Lund University"
-      educationName="Master of Science and Engineering in Computer Science"
-      description="I am currently studying my master in Computer Science at Lund University. I have taken courses in AI, Machine Learning, Software Engineering, Algorithms and Data Structures, Databases, Web Development, Computer Networks, Operating Systems, Computer Security, and more."
-      image={lundUniversity}
-    />
-    schoolName
-    <EducationCard
-      schoolName="University of British Columbia"
-      educationName="Exchange student in Computer Science"
-      description="During the fall of 2024 I spent one term of my master at University of British Colombia where I studied AI, Machine Learning, Operating Systems and Business"
-      image={ubc}
-    />
-    <h2>Education</h2>
-    <h2>Work experience</h2>
+  <div class="max-w-4xl mx-auto mt-20 px-4">
+    <h1 class="text-4xl font-bold mb-12">Experience</h1>
+    
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Work Experience</h2>
+      <div class="space-y-6">
+        <WorkExperienceCard
+          companyName="Combain Mobile AB"
+          role="App Developer"
+          period="January 2024 - Present"
+          description="Leading the development of advanced mobile SDKs used globally for precise location lookup by scanning Wi-Fi and BLE devices with AI-based position estimation. Developed an application leveraging Android AR Core to train an artificial neural network model for location lookups. Transitioned the location lookup process from backend to on-device execution using ONNX runtime, significantly improving efficiency. Contributed to standalone applications using Flutter and native iOS technologies."
+          image={combain}
+        />
+        <WorkExperienceCard
+          companyName="Recruto"
+          role="Full-stack Developer"
+          period="September 2020 - January 2024"
+          description="Handled PHP Zend Framework 1 development, Xamarin Forms mobile development, and implemented DevOps workflows. Introduced Docker for containerization, utilized RabbitMQ for messaging, and set up Grafana + Loki + Prometheus observability stack. Managed MySQL databases for web and mobile applications, achieving seamless integration, efficient collaboration, and effective monitoring capabilities."
+          image={recruto}
+        />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold mb-6">Education</h2>
+      <div class="space-y-6">
+        <EducationCard
+          schoolName="Lund University"
+          educationName="Master of Science in Computer Science"
+          period="2020 - Present"
+          description="Currently pursuing my master's degree in Computer Science with a focus on AI and Software Engineering. Courses include Machine Learning, Software Engineering, Algorithms, Databases, Web Development, Networks, Operating Systems, and Security."
+          image={lundUniversity}
+        />
+        <EducationCard
+          schoolName="University of British Columbia"
+          educationName="Exchange Student in Computer Science"
+          period="Fall 2024"
+          description="Completed one term as an exchange student, focusing on advanced courses in AI, Machine Learning, Operating Systems, and Business Studies."
+          image={ubc}
+        />
+      </div>
+    </section>
   </div>
 </Layout>

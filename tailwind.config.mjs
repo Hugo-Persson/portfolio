@@ -8,13 +8,6 @@ export default {
   },
   plugins: [
     require("@catppuccin/tailwindcss"),
-    require("daisyui"),
     require("@tailwindcss/typography"),
   ],
-  daisyui: {
-    themes: [
-      catppuccin("latte", { neutral: "surface0" }),
-      catppuccin("frappe"),
-    ],
-  },
 };

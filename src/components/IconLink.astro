@@ -1,13 +1,15 @@
 ---
 interface Props {
   href: string;
+  name: string;
 }
-const { href } = Astro.props;
+const { href, name } = Astro.props;
 ---
 
 <a
-  class="transform hover:translate-y-[-0.5rem] transition duration-300"
+  class="transform hover:translate-y-[-0.5rem] transition duration-300 tooltip"
   target="_blank"
+  data-tip=`Click to see ${name}`
   href={href}
 >
   <slot />

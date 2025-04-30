@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entries: CollectionEntry<'devlog'>[];
+}
+
+const { entries } = Astro.props;
+
+// Render each entry's content
+const renderedEntries = await Promise.all(
+  entries.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { 
+      ...entry,
+      Content
+    };
+  })
+);
+---
+
+{renderedEntries.length > 0 ? (
+  <div class="prose max-w-none">
+    <h1>Development Log</h1>
+    
+    {renderedEntries.map((entry, index) => {
+      const date = new Date(entry.data.date);
+      const isLast = index === renderedEntries.length - 1;
+      
+      return (
+        <article class={`mb-8 ${!isLast ? 'border-b pb-6' : ''}`}>
+          <h2 class="mb-2">{entry.data.name}</h2>
+          <div class="text-sm text-gray-500 mb-4">
+            {date.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long', 
+              day: 'numeric'
+            })}
+          </div>
+          
+          <entry.Content />
+        </article>
+      );
+    })}
+  </div>
+) : (
+  <div class="prose max-w-none">
+    <h1>Development Log</h1>
+    <p>No devlog entries found for this project.</p>
+  </div>
+)}

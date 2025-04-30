@@ -1,28 +1,124 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import ProjectCard from "@components/ProjectCard.astro";
+import Tabs from "@components/Tabs.astro";
 
-// You can replace these with your actual projects
-const projects = [
+// Organize projects by category
+const projects = {
+  hobby: [
     {
-        title: "OCR Latex",
-        description: "My personal portfolio website built with Astro, TailwindCSS, and TypeScript.",
-        technologies: ["Astro", "TailwindCSS", "TypeScript"],
-        githubUrl: "https://github.com/Hugo-Persson/obsidian-ocrlatex",
-        showStars: true,
-        slug: "image-to-markdown",
+      title: "OCR Latex",
+      description: "My personal portfolio website built with Astro, TailwindCSS, and TypeScript.",
+      technologies: ["Astro", "TailwindCSS", "TypeScript"],
+      githubUrl: "https://github.com/Hugo-Persson/obsidian-ocrlatex",
+      showStars: true,
+      slug: "image-to-markdown",
     },
-    // Add more projects here
-];
+    {
+      title: "Home Lab",
+      description: "My personal portfolio website built with Astro, TailwindCSS, and TypeScript.",
+      technologies: ["Astro", "TailwindCSS", "TypeScript"],
+      githubUrl: "https://github.com/Hugo-Persson/HomeLab",
+      showStars: true,
+      slug: "image-to-markdown",
+    },
+    {
+      title: "LazyTask",
+      description: "My personal portfolio website built with Astro, TailwindCSS, and TypeScript.",
+      technologies: ["Astro", "TailwindCSS", "TypeScript"],
+      githubUrl: "https://github.com/Hugo-Persson/HomeLab",
+      showStars: true,
+      slug: "lazytask",
+    },
+  ],
+  work: [
+    // Add work projects here
+    {
+      title: "Company Dashboard",
+      description: "An internal dashboard for data visualization and reporting.",
+      technologies: ["React", "Node.js", "MongoDB"],
+      githubUrl: "",
+      showStars: false,
+      slug: "company-dashboard",
+    },
+  ],
+  opensource: [
+    // Add open source maintainer projects here
+    {
+      title: "Ghostfolio",
+      description: "Contributed multiple features to this open-source wealth management application. Added functionality for portfolio tracking, fixed bugs, and implemented user-requested enhancements across multiple PRs.",
+      technologies: ["TypeScript", "Angular", "Node.js", "NestJS"],
+      githubUrl: "https://github.com/ghostfolio/ghostfolio",
+      showStars: true,
+      slug: "ghostfolio",
+    },
+    {
+      title: "Contribution Tracker",
+      description: "A tool for tracking open source contributions.",
+      technologies: ["JavaScript", "GitHub API"],
+      githubUrl: "https://github.com/username/contribution-tracker",
+      showStars: true,
+      slug: "contribution-tracker",
+    },
+  ],
+};
+
+// Default active tab
+const tabs = ["hobby", "work", "opensource"] as const;
+type TabType = typeof tabs[number];
+const tabLabels: Record<TabType, string> = {
+  "hobby": "Hobby Projects",
+  "work": "Work Projects",
+  "opensource": "Open Source Maintainer"
+};
 ---
 
 <Layout title="Projects - Hugo Persson">
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold text-text mb-8">My Projects</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map(project => (
-                <ProjectCard {...project} />
-            ))}
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-text mb-8">My Projects</h1>
+    
+    <Tabs 
+      tabs={tabs} 
+      tabLabels={tabLabels} 
+      defaultTab="hobby"
+      containerId="projects-tabs"
+    >
+      {tabs.map(tab => (
+        <div class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-tab={tab} data-active={tab === "hobby" ? "true" : "false"}>
+          {projects[tab].map(project => (
+            <div class="card-wrapper cursor-pointer" data-slug={project.slug}>
+              <ProjectCard {...project} />
+            </div>
+          ))}
         </div>
-    </div>
+      ))}
+    </Tabs>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const projectCards = document.querySelectorAll<HTMLElement>('.card-wrapper');
+      
+      // Make project cards clickable
+      projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const slug = card.dataset.slug;
+          if (slug) {
+            window.location.href = `/projects/${slug}`;
+          }
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .card-wrapper {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card-wrapper:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+  </style>
 </Layout>

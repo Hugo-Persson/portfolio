@@ -1,0 +1,84 @@
+---
+interface Props {
+  tabs: readonly string[];
+  tabLabels: Record<string, string>;
+  defaultTab: string;
+  containerId?: string;
+}
+
+const { tabs, tabLabels, defaultTab, containerId = "tabs-container" } = Astro.props;
+---
+
+<div class="tabs-container" id={containerId}>
+  <!-- Tab Navigation -->
+  <div class="mb-8 border-b border-gray-200">
+    <div class="flex space-x-8">
+      {tabs.map(tab => (
+        <button 
+          class="tab-button py-2 px-1 border-b-2 font-medium text-sm" 
+          data-tab={tab}
+          data-active={tab === defaultTab ? "true" : "false"}>
+          {tabLabels[tab]}
+        </button>
+      ))}
+    </div>
+  </div>
+  
+  <!-- Tab Content -->
+  <div class="tabs-content">
+    <slot />
+  </div>
+</div>
+
+<script define:vars={{ tabs, defaultTab, containerId }}>
+  // Initialize tab functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    const tabButtons = container.querySelectorAll('.tab-button');
+    const tabContents = container.querySelectorAll('.tab-content');
+    
+    // Style active/inactive tabs
+    const updateActiveTab = (activeTab) => {
+      // Update buttons
+      tabButtons.forEach(button => {
+        const isActive = button.dataset.tab === activeTab;
+        button.dataset.active = isActive ? "true" : "false";
+        button.classList.toggle('border-primary', isActive);
+        button.classList.toggle('border-transparent', !isActive);
+        button.classList.toggle('text-primary', isActive);
+        button.classList.toggle('text-gray-500', !isActive);
+      });
+      
+      // Update content visibility
+      tabContents.forEach(content => {
+        content.dataset.active = content.dataset.tab === activeTab ? "true" : "false";
+        content.classList.toggle('hidden', content.dataset.tab !== activeTab);
+      });
+    };
+    
+    // Set initial state
+    updateActiveTab(defaultTab);
+    
+    // Handle tab clicks
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        updateActiveTab(button.dataset.tab);
+      });
+    });
+  });
+</script>
+
+<style>
+  .tab-button[data-active="true"] {
+    border-color: var(--color-primary, #3b82f6);
+    color: var(--color-primary, #3b82f6);
+  }
+  
+  .tab-button[data-active="false"] {
+    border-color: transparent;
+    color: #6b7280;
+  }
+  
+</style>
