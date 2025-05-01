@@ -1,0 +1,50 @@
+---
+import Layout from "@layouts/Layout.astro";
+import EducationCard from "@components/experience/EducationCard.astro";
+import WorkExperienceCard from "@components/experience/WorkExperienceCard.astro";
+import { WORK_EXPERIENCE, EDUCATION } from "@root/config";
+---
+
+<Layout title="Experience - Hugo Persson">
+  <div class="container mx-auto flex">
+    <div class="w-1/2 p-4">
+      <h2
+        class="flex items-center gap-2 text-2xl font-semibold text-slate-800 mb-6"
+      >
+        <span class="text-ctp-sky-500">💼</span> Work Experience
+      </h2>
+
+      {
+        Object.entries(WORK_EXPERIENCE).map((pair) => (
+          <WorkExperienceCard
+            company={pair[1].company}
+            role={pair[1].role}
+            start={pair[1].start}
+            end={pair[1].end}
+            description={pair[1].description}
+            href={`/experience/work/${pair[0]}`}
+          />
+        ))
+      }
+    </div>
+
+    <div class="w-1/2 p-4">
+      <h2
+        class="flex items-center gap-2 text-2xl font-semibold text-slate-800 mb-6"
+      >
+        <span class="text-ctp-sky-500">🎓</span> Education
+      </h2>
+
+      {
+        Object.values(EDUCATION).map((education) => (
+          <EducationCard
+            university={education.university}
+            educationName={education.educationName}
+            period={education.period}
+            description={education.description}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Layout>

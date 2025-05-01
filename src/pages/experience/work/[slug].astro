@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import ExperienceLayout from "@layouts/WorkExperienceLayout.astro";
+
+const { slug } = Astro.params;
+if (!slug) {
+  throw new Error("Slug is required");
+}
+const experienceDocs = await getCollection("experience");
+const experienceDoc = experienceDocs.find((doc) => {
+  return doc.slug === slug;
+});
+
+if (!experienceDoc) {
+  throw new Error("Experience document not found");
+}
+const { Content } = await experienceDoc.render();
+---
+
+<ExperienceLayout slug={slug}>
+  <Content />
+</ExperienceLayout>
+

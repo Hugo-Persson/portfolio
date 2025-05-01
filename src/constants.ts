@@ -21,17 +21,19 @@ export enum Skills {
 
 export const proseClasses = `prose prose-h1:text-text mx-auto
     font-sans
-    prose-code:text-mauve
-    prose-strong:text-sky
-    prose-blockquote:bg-mantle prose-blockquote:border-l-mauve prose-blockquote:text-text
+    prose-code:text-ctp-mauve
+    prose-strong:text-ctp-sky
+    prose-blockquote:bg-ctp-mantle
+    prose-blockquote:border-l-ctp-mauve
+    prose-blockquote:text-text
     prose-h2:text-subtext0 prose-h3:text-subtext1
-    prose-a:text-blue
-    prose-p:text-text
-    prose-a:hover:text-sky
-    prose-ul:text-text
-    prose-ol:text-text
-    marker:text-text
-    li:text-text
+    prose-a:text-ctp-blue
+    prose-p:text-ctp-text
+    prose-a:hover:text-ctp-sky
+    prose-ul:text-ctp-text
+    prose-ol:text-ctp-text
+    marker:text-ctp-text
+    li:text-ctp-text
 
 
 `;

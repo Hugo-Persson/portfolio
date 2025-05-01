@@ -32,8 +32,8 @@ if (showStars) {
             class="w-full h-48 object-cover rounded-md mb-4"
         />
     )}
-    <h3 class="text-xl font-bold text-text mb-2">{title}</h3>
-    <p class="text-text/80 mb-4">{description}</p>
+    <h3 class="text-xl font-bold text-ctp-text mb-2">{title}</h3>
+    <p class="text-ctp-text/80 mb-4">{description}</p>
     
     <div class="flex flex-wrap gap-2 mb-4">
         {technologies.map(tech => (
@@ -44,7 +44,7 @@ if (showStars) {
     </div>
     
     <div class="flex flex-wrap gap-4 items-center justify-between">
-        <a href={githubUrl} target="_blank" class="text-sky hover:text-purple transition-colors flex items-center gap-2">
+        <a href={githubUrl} target="_blank" class="text-ctp-sky hover:text-purple transition-colors flex items-center gap-2">
             GitHub
             {showStars && stars !== null && (
                 <span class="flex items-center gap-1 text-sm">
@@ -57,7 +57,7 @@ if (showStars) {
         </a>
         <a 
             href={`/projects/${slug}`} 
-            class="text-sky hover:text-purple transition-colors flex items-center gap-1"
+            class="text-ctp-sky hover:text-purple transition-colors flex items-center gap-1"
         >
             Read More
             <svg 

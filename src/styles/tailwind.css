@@ -1,13 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@import "@catppuccin/tailwindcss/mocha.css";
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 @layer utilities {
   .highlight-text {
-    @apply from-pink;
-    @apply to-mauve;
+    @apply from-ctp-pink;
+    @apply to-ctp-mauve;
     @apply text-transparent;
     @apply bg-clip-text;
     @apply bg-gradient-to-r;
   }
+}
+
+.article-list-post:hover h3 {
+  /* @apply highlight-ctp-text; */
 }

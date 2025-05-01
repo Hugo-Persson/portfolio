@@ -13,23 +13,24 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.5.1",
-    "@astrojs/mdx": "^4.2.5",
+    "@astrojs/cloudflare": "^12.5.2",
+    "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.1",
-    "@astrojs/tailwind": "^6.0.2",
-    "@fontsource-variable/jetbrains-mono": "^5.0.21",
-    "astro": "^5.7.9",
-    "astro-expressive-code": "^0.35.3",
-    "lucide-astro": "^0.379.0",
+    "@fontsource-variable/jetbrains-mono": "^5.2.5",
+    "@tailwindcss/postcss": "^4.1.5",
+    "@tailwindcss/vite": "^4.1.5",
+    "astro": "^5.7.10",
+    "astro-expressive-code": "^0.41.2",
+    "lucide-astro": "^0.503.0",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.5",
-    "zod": "^3.23.8"
+    "tailwindcss": "^4.1.5",
+    "typescript": "^5.8.3",
+    "zod": "^3.24.3"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.9.5"
+    "@rollup/rollup-linux-x64-gnu": "4.40.1"
   },
   "overrides": {
     "vite": {
@@ -37,11 +38,9 @@
     }
   },
   "devDependencies": {
-    "@catppuccin/daisyui": "^1.1.2",
-    "@catppuccin/tailwindcss": "^0.1.6",
-    "@tailwindcss/typography": "^0.5.13",
-    "daisyui": "^4.12.10",
-    "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.13.0"
+    "@catppuccin/tailwindcss": "^1.0.0-beta.2",
+    "@tailwindcss/typography": "^0.5.16",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

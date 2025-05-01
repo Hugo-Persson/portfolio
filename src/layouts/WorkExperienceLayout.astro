@@ -1,0 +1,30 @@
+---
+import { proseClasses } from "@root/constants";
+import Layout from "./Layout.astro";
+import { WORK_EXPERIENCE } from "@root/config";
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+const company = WORK_EXPERIENCE[slug];
+---
+
+<Layout title={company.company}>
+  <article class={proseClasses}>
+    <h1
+      class="not-prose mb-2 mt-10 text-2xl text-ctp-sky font-extrabold md:mr-6 md:text-4xl"
+    >
+      {company.company}
+    </h1>
+    <h3>{company.role}</h3>
+    <div class="text-subtext1">
+      {company.start} – {company.end}
+      <div>
+        <hr />
+        <div class="font-serif">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </article></Layout
+>

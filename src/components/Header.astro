@@ -83,7 +83,7 @@ const headerLinks = [
     currentPath === "/" ? (
       <h1 />
     ) : (
-      <a class="text-text" href="/">
+      <a class="text-ctp-text" href="/">
         Hugo Persson
       </a>
     )
@@ -94,7 +94,7 @@ const headerLinks = [
     {
       headerLinks.map((link, index) => (
         <a
-          class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`}
+          class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-ctp-text"}`}
           href={link.href}
         >
           {index}. {link.text}
@@ -104,7 +104,7 @@ const headerLinks = [
   </div>
 
   <!-- Mobile Menu Button -->
-  <button id="menu-btn" class="mobile-menu-btn text-text">
+  <button id="menu-btn" class="mobile-menu-btn text-ctp-text">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -129,7 +129,7 @@ const headerLinks = [
   class="fixed bottom-0 z-50 top-0 left-0 right-0 bg-base p-4 shadow-lg"
 >
   <!-- Add close button -->
-  <button id="close-menu-btn" class="absolute top-4 right-4 text-text">
+  <button id="close-menu-btn" class="absolute top-4 right-4 text-ctp-text">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
@@ -150,7 +150,7 @@ const headerLinks = [
     {
       headerLinks.map((link, index) => (
         <a
-          class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-text"}`}
+          class={`${link.href == currentPath || (link.href != "/" && currentPath.startsWith(link.href)) ? "highlight-text" : "text-ctp-text"}`}
           href={link.href}
         >
           {index}. {link.text}

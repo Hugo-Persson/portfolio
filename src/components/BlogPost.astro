@@ -1,11 +1,13 @@
 ---
-import type { postSchema } from "src/content/config";
+import { basePostSchema } from "src/content/config";
 import { Image } from "astro:assets";
 import { z } from "zod";
-type PostType = z.infer<typeof postSchema>;
+const PostSchema = z.object(basePostSchema);
+type PostSchema = z.infer<typeof PostSchema>;
+
 interface Props {
   slug: string;
-  post: PostType;
+  post: PostSchema;
   cover: any;
   minutesRead: string;
 }
@@ -45,7 +47,7 @@ const href = `/blog/${slug}`;
             })
           }
         </div>
-      </div><div class="prose py-1 dark:prose-invert text-text">
+      </div><div class="prose py-1 dark:prose-invert text-ctp-text">
         {post.description}
       </div>
     </div>
