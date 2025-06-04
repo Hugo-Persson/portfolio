@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import expressiveCode from "astro-expressive-code";
 import sitemap from "@astrojs/sitemap";
@@ -14,8 +14,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  output: "server",
-  adapter: cloudflare({}),
+  image: {
+    service: passthroughImageService(),
+  },
+  // output: "server",
+  // adapter: cloudflare({}),
   markdown: {
     remarkPlugins: [remarkReadingTime],
   },

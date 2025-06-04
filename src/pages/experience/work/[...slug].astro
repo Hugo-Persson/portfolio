@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import ExperienceLayout from "@layouts/WorkExperienceLayout.astro";
+
+export async function getStaticPaths() {
+  const experienceDocs = await getCollection("experience");
+  return experienceDocs.map((doc) => ({
+    params: { slug: doc.slug },
+    props: { experienceDoc: doc },
+  }));
+}
+
+const { slug } = Astro.params;
+const { experienceDoc } = Astro.props;
+
+if (!slug) {
+  throw new Error("Slug is required");
+}
+
+// Use the experienceDoc from props if available, otherwise fetch it
+let doc = experienceDoc;
+
+if (!doc) {
+  throw new Error("Experience document not found");
+}
+
+const { Content } = await doc.render();
+---
+
+<ExperienceLayout slug={slug}>
+  <Content />
+</ExperienceLayout>
