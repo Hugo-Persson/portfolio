@@ -1,6 +1,6 @@
 ---
 title: How I use OpenTofu (Terraform) to automate Authentik
-description: "In my Home Lab I use Authentik to manage authentication and authorization for all users. This works great but I often find myself doing tedius tasks like setting up my servicdes. This is where Open Tofu comes in. I can use Open Tofu to manage my Authentik instance and automate the process of setting up new services."
+description: "In my Home Lab, I use Authentik to manage authentication and authorization for all users. This works great, but I often find myself doing tedious tasks like setting up my services. 
 pubDate: 2025-05-19
 tags:
   - Authentik
@@ -13,27 +13,57 @@ light: ./light.png
 dark: ./dark.png
 slug: how-i-use-opentofu-in-homelab
 ---
+## Why OpenTofu?
 
-## What is OpenTofu?
+[OpenTofu](https://opentofu.org) is an open-source Infrastructure-as-Code (IaC) engine that
+remains syntax-compatible with Terraform while being **fully community-governed**.  
+I use it to describe every Authentik object—users, groups, applications, and providers—in plain
+HCL. After a quick `tofu apply`, my Authentik instance is **reproducible, version-controlled, and
+self-documenting**.
 
-OpenTofu is an open-source infrastructure-as-code (IaC) tool developed as a community-driven fork of Terraform. In my HomeLab I currently use it to manage Authentik settings.
-It allows me to create a config file to define users, groups, and services, which can then be applied to my Authentik instance. This makes it easy to manage and automate the setup of new services and users. Without OpenTofu the process of managing applications was tedius and repetitive, with OpenTofu I have the ability to abstract the configuration and automate the process of setting up new services.
+Without IaC, adding a new service meant clicking through the UI, copying client IDs,
+forgetting which scopes to check, and inevitably missing a step. Now it's a single
+pull request.
 
-## Setup
+---
 
-## Authentik
+## Preparing Authentik
 
-In my HomeLab I use Authentik as authentication service for all my HomeLab services. For services that support OIDC I use that and for services that do not support OIDC I use a forward proxy. Then I manage what service each user has access to in Authentik.
+### Generate an API token
 
-![Dashboard](/Users/hugo/my-projects/portfolio/img/2025-05-28-15-42-09.png)
+1. In the Authentik UI, go to **Settings → Tokens and App passwords**.
+2. Click **Create Token**
+3. Copy the token
 
-### Getting API key
+### Provider configuration
 
+```terraform
+terraform {
+  required_providers {
+    authentik = {
+      source  = "goauthentik/authentik"
+      version = "~> 2025.4"
+    }
+  }
+}
+
+provider "authentik" {
+  host  = "https://authentik.example.com"
+  token = var.authentik_token
+}
+```
+
+Save the token in `terraform.tfvars` like this:
+```terraform title="terraform.tfvars"
+authentik_token = "your_api_token_here"
+```
+
+---
 ### Creating users
 
-Many people need access to my HomeLab for differnt use cases. In this part I show how I create users with a random password and.
+Many people need access to my HomeLab for different use cases. In this section, I show how I create users with a random password.
 
-First I generate a unique password like this:
+First, I generate a unique password like this:
 
 ```terraform
 resource "random_password" "ludvig_password" {
@@ -46,9 +76,9 @@ Then
 
 ### Managing access
 
-The first thing I want to configure for my users is what services they have access to. I do this by creating groups and assigning users to those groups.
+The first thing I want to configure for my users is which services they have access to. I do this by creating groups and assigning users to those groups.
 
-Each group has a certain set of services that belong together, for example I have a group `family` that gives access to our shared recipe bank. To create a group and assign users to it. I use the following code:
+Each group has a certain set of services that belong together. For example, I have a group called `family` that gives access to our shared recipe bank. To create a group and assign users to it, I use the following code:
 
 ```terraform
 resource "authentik_group" "group_name" {  # <- Replace with your group name
@@ -67,17 +97,17 @@ resource "authentik_policy_binding" "binding" {
 }
 ```
 
-This creates a group with the name `group_name` and assigns the users `user_name` and `user_name2` to it. The `authentik_policy_binding` resource is used to bind the group to the services you want them to have access to, replace `binding` with a descriptive name for your binding. Then I configure this binding to have access to `app1` and `app2`, see below for app configuration.
+This creates a group with the name `group_name` and assigns the users `user_name` and `user_name2` to it. The `authentik_policy_binding` resource is used to bind the group to the services you want them to have access to. Replace `binding` with a descriptive name for your binding. Then I configure this binding to have access to `app1` and `app2`. See below for app configuration.
 
 ### Create an application
 
-An application in Authentik is a service that users can access. You then configure each application with a provider to authenticate users. I use OIDC and Proxy authentication and will detail how these further in this post.
+An application in Authentik is a service that users can access. You then configure each application with a provider to authenticate users. I use OIDC and Proxy authentication and will detail how to configure these further in this post.
 
-To configure an application I have abstracted the process into a module that I can reuse for each application. I have two modules for this, one for OIDC and one for Proxy authentication. See respective sections below for details on how to create these modules and use them.
+To configure an application, I have abstracted the process into a module that I can reuse for each application. I have two modules for this: one for OIDC and one for Proxy authentication. See the respective sections below for details on how to create these modules and use them.
 
 ### Creating a module
 
-A module in OpenTofu is a reusable piece of code that can be used to create resources. I have created two modules, one for OIDC and one for Proxy authentication. To create a module, you need to create a folder with the name of the module and a file called `main.tf` inside it. I have the following structure for my modules:
+A module in OpenTofu is a reusable piece of code that can be used to create resources. I have created two modules: one for OIDC and one for Proxy authentication. To create a module, you need to create a folder with the name of the module and a file called `main.tf` inside it. I have the following structure for my modules:
 
 ```
 .
@@ -93,7 +123,7 @@ A module in OpenTofu is a reusable piece of code that can be used to create reso
 
 ### Creating Proxy authentication
 
-A proxy authentication is used for services that do not support OIDC. It acts as a middleman between the user and the service, allowing the user to authenticate with Authentik and then access the service. This is combined with a reverse proxy, see my other blog post on how to configure integration with Traefik.
+Proxy authentication is used for services that do not support OIDC. It acts as a middleman between the user and the service, allowing the user to authenticate with Authentik and then access the service. This is combined with a reverse proxy. See my other blog post on how to configure integration with Traefik.
 
 #### Using the module
 
@@ -115,7 +145,7 @@ module "zigbee2mqtt" {
 }
 ```
 
-We do this for all the services then we bind them to the outpost used by Traefik, see my other blog post on how to configure integration with Traefik. The binding is done like this:
+We do this for all the services, then we bind them to the outpost used by Traefik. See my other blog post on how to configure integration with Traefik. The binding is done like this:
 
 ```terraform title="main.tf"
 resource "authentik_outpost" "embedded_outpost" {
@@ -204,7 +234,7 @@ variable "slug" {
 
 variable "meta_icon" {
   type        = string
-  description = "Will use auto icon from selfhst if not provided using slug as service name. Provide to use differnt icon"
+  description = "Will use auto icon from selfhst if not provided using slug as service name. Provide to use different icon"
   default     = null
 }
 
@@ -217,16 +247,16 @@ variable "external_host" {
 
 ### Creating OIDC service
 
-An OIDC service is used for services that support OIDC authentication. It allows users to authenticate with Authentik and then access the service. I have created a module for this as well, see below for details on how to create this module.
+An OIDC service is used for services that support OIDC authentication. It allows users to authenticate with Authentik and then access the service. I have created a module for this as well. See below for details on how to create this module.
 
 #### Using the module
 
 Each OIDC service is configured with a module that takes the following parameters:
 
 - `name`: The name of the application.
-- `slug`: The URL-friendly identifier for the application, used in the `external
-- `client_id`: A unique identifier for the OIDC client, this is used to identify the application in Authentik, generate this as a UUID.
-- `redirect_url`: A list of redirect URLs for the application, these are the URLs that the user will be redirected to after authentication.
+- `slug`: The URL-friendly identifier for the application, used in the external host.
+- `client_id`: A unique identifier for the OIDC client. This is used to identify the application in Authentik. Generate this as a UUID.
+- `redirect_url`: A list of redirect URLs for the application. These are the URLs that the user will be redirected to after authentication.
 
 Then I use the module like this:
 
@@ -245,7 +275,7 @@ module "proxmox" {
 
 #### Creating the module
 
-How to create module to use
+Here's how to create the module:
 
 ```terraform title="modules/directory_app/main.tf"
 terraform {
@@ -320,7 +350,7 @@ output "application_id" {
 
 ```
 
-````terraform title="modules/directory_app/variables.tf"
+```terraform title="modules/directory_app/variables.tf"
 variable "name" {
   description = "Name of the application"
   type        = string
@@ -358,26 +388,27 @@ variable "meta_icon" {
   description = "Will use auto icon from selfhst if not provided using slug as service name. Provide to use different icon"
   default     = null
 }
+```
 
 ### Importing data
 
-Before starting to use OpenTofu I needed to import the data I already had in Authentik. I had created multiple services and users already and did not want to lose them. The process to import data follows the following steps:
+Before starting to use OpenTofu, I needed to import the data I already had in Authentik. I had created multiple services and users already and did not want to lose them. The process to import data follows these steps:
 
-1. Define config, this is what we did above
+1. Define config (this is what we did above)
 2. Find the ID for your service
 3. Run import command
 
 #### Accessing API
 
-Go to ` https://authentik.company/api/v3/`
-NOTE: Do not forget ending `/`, you will get 404 then.
+Go to `https://authentik.company/api/v3/`
+NOTE: Do not forget the ending `/`—you will get a 404 error otherwise.
 
-Enter your API key you got in earlier section.
+Enter your API key you obtained in the earlier section.
 
 #### Users
 
-To import users I created a config for the user I nee
-Use the endpoint `/core/users`, you get response like this back:
+To import users, I created a config for the user I needed.
+Use the endpoint `/core/users`. You get a response like this back:
 
 ```json
 {
@@ -392,7 +423,7 @@ Use the endpoint `/core/users`, you get response like this back:
     ...
   ]
 }
-````
+```
 
 ```sh
 tofu import authentik_user.hugo $PK
@@ -400,7 +431,7 @@ tofu import authentik_user.hugo $PK
 
 #### Application
 
-use the endpoint `/core/applications/`
+Use the endpoint `/core/applications/`
 
 ```json
 {
@@ -417,7 +448,7 @@ use the endpoint `/core/applications/`
 }
 ```
 
-The first step is to figure out the UUID
+The first step is to figure out the UUID:
 
 ```sh
 tofu import module.$NAME.authentik_application.$NAME $PK
@@ -446,7 +477,7 @@ tofu import module.sonarr.authentik_provider_proxy.proxy $PK
 
 #### OAuth provider
 
-Use the endpoint ` /providers/oauth2/`
+Use the endpoint `/providers/oauth2/`
 
 ```json
 {
