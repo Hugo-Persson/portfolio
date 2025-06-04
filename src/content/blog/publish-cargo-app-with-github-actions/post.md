@@ -1,6 +1,6 @@
 ---
 title: "Publish a Rust CLI App with GitHub Actions"
-description: "How to create a GitHub Actions workflow to automatically build a Rust app. Create a GitHub release and attach the binary to it for all platforms. For example if you have a Rust CLI app that you want to publish the binaries to GitHub so people can download your tools, this is how to do it."
+description: "How to create a GitHub Actions workflow to automatically build a Rust app. Create a GitHub release and attach the binary to it for all platforms"
 pubDate: 2024-05-31
 tags: ["rust", "github-actions", "ci/cd", "cargo"]
 keywords: []

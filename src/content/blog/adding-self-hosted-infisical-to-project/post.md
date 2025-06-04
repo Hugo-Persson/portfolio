@@ -1,6 +1,6 @@
 ---
-title: "Simplify Secret Management with Infisical: A Guide to Self-Hosting and Integration"
-description: "Discover how to self-host and integrate Infisical for streamlined secret management. This guide covers setup, Next.js and Python integration, multi-environment handling, and key rotation, helping you enhance security and simplify workflows across your projects."
+title: "Simplify Secret Management with Infisical"
+description: "Discover how to self-host and integrate Infisical for streamlined secret management. This guide covers setup, Next.js and Python integration, multi-environment handling, and key rotation."
 pubDate: 2024-12-05T00:00:00.000Z
 tags:
   - DevOps

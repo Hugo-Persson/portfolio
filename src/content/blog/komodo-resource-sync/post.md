@@ -1,6 +1,6 @@
 ---
 title: "Migrating to Komodo with Git-Based Resource Syncs for my HomeLab"
-description: "Learn how I transitioned my HomeLab setup from Portainer to Komodo using Git-based Resource Syncs. This guide covers setting up, deploying, and syncing configurations for improved replicability and version control."
+description: "Learn how I transitioned my HomeLab setup from Portainer to Komodo using Git-based Resource Syncs. "
 pubDate: 2024-12-17T00:00:00.000Z
 tags:
   - HomeLab

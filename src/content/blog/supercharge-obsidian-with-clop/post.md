@@ -1,6 +1,6 @@
 ---
-title: "How Clop Slashed My Obsidian Vault Size by 75%: A Developer’s Guide to Smart Media Optimization"
-description: "Discover how to automatically compress images, PDFs, and recordings in your Obsidian vault while maintaining quality. This practical guide shows you how to set up Clop for effortless media optimization and potentially reduce your vault size by up to 75%"
+title: "How Clop Slashed My Obsidian Vault Size by 75%"
+description: "Discover how to automatically compress images, PDFs, and recordings in your Obsidian vault while maintaining quality."
 pubDate: 2024-11-27
 tags: ["obsidian", "mac-tools"]
 keywords: []

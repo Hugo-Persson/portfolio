@@ -20,11 +20,11 @@ const href = `/blog/${slug}`;
 <a href={href} aria-label={post.title}>
   <article class="mt-6 flex flex-row">
     <div class="flex-none pe-4 sm:pe-6">
-      <Image src={light} alt="" class="w-35 rounded-md sm:w-56 dark:hidden" />
+      <Image src={light} alt="" class="w-35 rounded-md sm:w-60 dark:hidden" />
       <Image
         src={dark}
         alt=""
-        class="w-35 rounded-md sm:w-56 hidden dark:block"
+        class="w-35 rounded-md sm:w-60 hidden dark:block"
       />
     </div><div>
       <h3 class="flex items-center text-xl font-semibold">{post.title}</h3><div
@@ -50,7 +50,7 @@ const href = `/blog/${slug}`;
             })
           }
         </div>
-      </div><div class="prose py-1 dark:prose-invert text-ctp-text">
+      </div><div class="prose py-1 dark:prose-invert text-ctp-text text-sm">
         {post.description}
       </div>
     </div>

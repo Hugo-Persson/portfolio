@@ -2,10 +2,7 @@
 title: How to publish CLI app with Homebrew
 description: >-
   In this post, I will show how to publish any CLI app to Homebrew. The formula
-  will install the binaries from GitHub Releases for a completely free setup.I
-  had quite a lot of problem figuring out how to do this, so I hope this post
-  will help you. We will create a formula for our app and publish it to our own
-  Homebrew Tap.
+  will install the binaries from GitHub Releases for a completely free setup.
 pubDate: 2024-06-07T00:00:00.000Z
 tags:
   - homebrew
