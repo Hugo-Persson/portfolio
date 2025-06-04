@@ -13,7 +13,9 @@ tags:
   - Docker
 keywords: []
 draft: false
-cover: ./images/komodo-resource-sync.png
+dark: ./dark.png
+light: ./light.png
+slug: komodo-resource-sync
 ---
 
 # Migrating My HomeLab Setup to Komodo

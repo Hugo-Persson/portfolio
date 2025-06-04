@@ -2,23 +2,30 @@
 import { basePostSchema } from "src/content/config";
 import { Image } from "astro:assets";
 import { z } from "zod";
+import Tag from "@components/Tag.astro";
 const PostSchema = z.object(basePostSchema);
 type PostSchema = z.infer<typeof PostSchema>;
 
 interface Props {
   slug: string;
   post: PostSchema;
-  cover: any;
+  light: any;
+  dark: any;
   minutesRead: string;
 }
-const { slug, post, cover, minutesRead } = Astro.props;
+const { slug, post, light, dark, minutesRead } = Astro.props;
 const href = `/blog/${slug}`;
 ---
 
 <a href={href} aria-label={post.title}>
   <article class="mt-6 flex flex-row">
     <div class="flex-none pe-4 sm:pe-6">
-      <Image src={cover} alt="" class="w-35 rounded-md sm:w-56" />
+      <Image src={light} alt="" class="w-35 rounded-md sm:w-56 dark:hidden" />
+      <Image
+        src={dark}
+        alt=""
+        class="w-35 rounded-md sm:w-56 hidden dark:block"
+      />
     </div><div>
       <h3 class="flex items-center text-xl font-semibold">{post.title}</h3><div
         class="text-sm text-neutral-500 dark:text-neutral-400"
@@ -39,11 +46,7 @@ const href = `/blog/${slug}`;
         >
           {
             post.tags.map((tag: string) => {
-              return (
-                <span class="mx-1 my-1 rounded-md border border-neutral-200 px-1 py-[1px] hover:border-primary-300 hover:text-primary-700 dark:border-neutral-600 dark:hover:border-primary-600 dark:hover:text-primary-400">
-                  {tag}
-                </span>
-              );
+              return <Tag>{tag}</Tag>;
             })
           }
         </div>

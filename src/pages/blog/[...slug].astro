@@ -10,6 +10,7 @@ export async function getStaticPaths() {
     if (entry.data.draft) {
       continue;
     }
+    console.log(`Generating path for blog entry: ${entry.slug}`);
     paths.push({
       params: { slug: entry.slug },
       props: { entry },
@@ -19,9 +20,9 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 ---
 
-<MarkdownPostLayout post={entry}>
+<MarkdownPostLayout post={entry.data} headings={headings}>
   <Content />
 </MarkdownPostLayout>

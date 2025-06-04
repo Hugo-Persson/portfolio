@@ -8,6 +8,7 @@ export const basePostSchema = {
   tags: z.array(z.string()),
   keywords: z.array(z.string()),
   draft: z.boolean(),
+  slug: z.string().optional(),
 };
 
 const postsCollection = defineCollection({
@@ -15,7 +16,8 @@ const postsCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       ...basePostSchema,
-      cover: image(),
+      light: image(),
+      dark: image(),
     }),
 });
 const devLogCollection = defineCollection({

@@ -7,7 +7,9 @@ tags:
   - notetaking
 keywords: []
 draft: false
-cover: ./images/obsidian-notetaking.png
+dark: ./dark.png
+light: ./light.png
+slug: my-obsidian-note-taking-system
 ---
 
 ## Outline

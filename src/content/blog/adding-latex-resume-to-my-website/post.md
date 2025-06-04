@@ -2,13 +2,15 @@
 title: My Resume as a PDF to My Website Using LaTeX and GitHub Actions
 description: >-
   A step-by-step guide on how I used LaTeX to create my resume and automated its publication to my website as a PDF using GitHub Actions. This article outlines my workflow on macOS, from creating the resume to deploying it automatically.
-pubDate: 2024-10-25T00:00:00.000Z
+pubDate: 2024-10-25
 tags:
   - latex
   - github-actions
 keywords: []
 draft: false
-cover: ./images/cv-workflow.png
+slug: adding-latex-resume-to-my-website
+dark: ./dark.png
+light: ./light.png
 ---
 
 ## Goals

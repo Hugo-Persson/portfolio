@@ -5,7 +5,9 @@ pubDate: 2024-05-24
 tags: ["wireguard", "docker", "dns"]
 keywords: []
 draft: false
-cover: ./images/wireguard-docker.png
+light: ./light.png
+dark: ./dark.png
+slug: wg-easy-docker-with-dns
 ---
 
 ## Guide

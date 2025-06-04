@@ -12,7 +12,9 @@ tags:
   - cli
 keywords: []
 draft: false
-cover: ./images/publish-to-homebrew.png
+light: ./light.png
+dark: ./dark.png
+slug: how-to-publish-homebrew-package
 ---
 
 ## Setting up a tap

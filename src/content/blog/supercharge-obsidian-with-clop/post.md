@@ -5,7 +5,9 @@ pubDate: 2024-11-27
 tags: ["obsidian", "mac-tools"]
 keywords: []
 draft: false
-cover: ./images/obsidian-clop/obsidian+clop.png
+dark: ./dark.png
+light: ./light.png
+slug: supercharge-obsidian-with-clop
 ---
 
 ## Why use Clop?

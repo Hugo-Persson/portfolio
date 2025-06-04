@@ -5,7 +5,9 @@ pubDate: 2024-12-10
 tags: ["rust", "github-actions", "ci/cd", "cargo"]
 keywords: []
 draft: false
-cover: ./images/traefik-multi-host.png
+dark: ./dark.png
+light: ./light.png
+slug: multi-host-traefik
 ---
 
 ## Overview

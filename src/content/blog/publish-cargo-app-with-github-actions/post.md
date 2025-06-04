@@ -5,7 +5,9 @@ pubDate: 2024-05-31
 tags: ["rust", "github-actions", "ci/cd", "cargo"]
 keywords: []
 draft: false
-cover: ./images/rust.png
+dark: ./dark.png
+light: ./light.png
+slug: publish-cargo-app-with-github-actions
 ---
 
 ## Overview

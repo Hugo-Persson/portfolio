@@ -2,6 +2,7 @@
 title: "Setting Up Authentik for Komodo: A Step-by-Step Guide"
 description: "In this post, I will walk you through the process of integrating Komodo with Authentik for secure authentication using OIDC. Giving you a streamlined and secure authentication process."
 pubDate: 2024-12-23
+slug: komodo-authentik
 tags:
   - Komodo
   - Authentik
@@ -10,7 +11,8 @@ tags:
   - Docker
 keywords: []
 draft: false
-cover: ./images/authentik-komodo.jpg
+dark: ./dark.png
+light: ./light.png
 ---
 
 ## Step 1: Create an OAuth2 Service in Authentik

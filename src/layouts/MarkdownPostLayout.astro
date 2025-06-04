@@ -1,42 +1,85 @@
 ---
 import { proseClasses } from "@root/constants";
 import Layout from "./Layout.astro";
-interface Post {
-  data: {
-    title: string;
-    date: string;
-    pubDate: string;
-    description: string;
-  };
+import TableOfContentsComponent from "@components/TableOfContents.astro";
+import PostMetadata from "@components/blog/metadata.astro";
+import { type CollectionEntry, type InferEntrySchema } from "astro:content";
+import { TableOfContents, Facebook, Twitter, Linkedin } from "lucide-astro";
+
+interface Props {
+  post: InferEntrySchema<"blog">;
+  headings: import("astro").MarkdownHeading[];
 }
-const post: Post = Astro.props.post as Post;
+
+const { post, headings } = Astro.props as Props;
+// Extract reading time from remark-reading-time plugin if available
+const readingTime = 20;
 ---
 
-<Layout title={post.data.title}>
-  <article class={proseClasses}>
-    <h1
-      class="not-prose mb-2 mt-10 text-2xl highlight-text font-extrabold md:mr-6 md:text-4xl"
-    >
-      {post.data.title}
-    </h1>
-    <div>
-      <time datetime={post.data.date} class="text-subtext1">
-        {
-          new Date(post.data.pubDate).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
-      </time>
-    </div>
-    <h2>Summary</h2>
-    <p>
-      {post.data.description}
-    </p>
+<Layout title={post.title}>
+  <div class="relative">
 
-    <div class="font-serif">
-      <slot />
+    <!-- Table of Contents Sidebar -->
+     <div class="top-30 xl:block sticky"
+     >
+    <div
+      class="font-mono text-sm text-slate-500 absolute -right-6 pl-6  w-72 space-y-4 border border-y-0 border-r-0 dark:border-slate-700"
+    >
+      <TableOfContentsComponent headings={headings} levels={3} />
+  </div>
+    
     </div>
-  </article>
+
+    <article class={proseClasses}>
+      <h1
+        class="not-prose title font-bold text-4xl leading-tight my-4 text-balance"
+      >
+        {post.title}
+      </h1>
+      <PostMetadata post={post} />
+      <h2 class="mt-1">Summary</h2>
+      <p>
+        {post.description}
+      </p>
+
+      <div class="font-serif">
+        <slot />
+      </div>
+    </article>
+
+    <!-- Post Tail -->
+    <div
+      class=`post-tail-wrapper text-subtext1 flex justify-between mt-4 ${proseClasses} border-t border-ctp-surface0`
+    >
+      <div></div>
+      <!-- Share Buttons -->
+      <div class="flex gap-2">
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
+          target="_blank"
+          class="text-subtext1 hover:text-ctp-blue text-sm p-2 rounded transition-colors"
+          title="Share on Twitter"
+        >
+          <Twitter />
+        </a>
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
+          target="_blank"
+          class="text-subtext1 hover:text-ctp-blue text-sm p-2 rounded transition-colors"
+          title="Share on Facebook"
+        >
+          <Facebook />
+        </a>
+        <a
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`}
+          target="_blank"
+          class="text-subtext1 hover:text-ctp-blue text-sm p-2 rounded transition-colors"
+          title="Share on LinkedIn"
+        >
+          <Linkedin />
+        </a>
+      </div>
+    </div>
+
+  </div>
 </Layout>

@@ -4,8 +4,17 @@ description: "Why I switched from Yabai to Aerospace and why you should too. I w
 pubDate: 2024-10-15T00:00:00.000Z
 tags: ["cli", "dotfile", "macos"]
 keywords: []
-draft: false
+draft: true
 cover: ./images/tiling-manager.png
 ---
 
-# Outline
+## Git
+
+- git commit
+- shell integration
+
+## Shell integration
+
+## Editor
+
+I use

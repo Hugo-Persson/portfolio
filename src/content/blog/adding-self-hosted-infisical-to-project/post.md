@@ -13,7 +13,9 @@ tags:
   - Secrets Rotation
 keywords: []
 draft: false
-cover: ./images/infisical.png
+dark: ./dark.png
+light: ./light.png
+slug: adding-self-hosted-infisical-to-project
 ---
 
 # What is Infisical?

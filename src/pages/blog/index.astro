@@ -12,6 +12,8 @@ const allPostsPromise = (await getCollection("blog"))
       slug: e.slug,
       data: e.data,
       minutesRead: remarkPluginFrontmatter.minutesRead as string,
+      light: e.data.light,
+      dark: e.data.dark,
     };
   });
 const allPosts = await Promise.all(allPostsPromise).then((e) =>
@@ -32,7 +34,8 @@ const allPosts = await Promise.all(allPostsPromise).then((e) =>
             slug={post.slug}
             minutesRead={post.minutesRead}
             post={post.data}
-            cover={post.data.cover}
+            light={post.light}
+            dark={post.dark}
           />
         ))
       }

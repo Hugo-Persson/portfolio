@@ -16,6 +16,9 @@
     @apply bg-clip-text;
     @apply bg-gradient-to-r;
   }
+  .toc-current {
+    @apply text-ctp-sky;
+  }
 }
 
 .article-list-post:hover h3 {
