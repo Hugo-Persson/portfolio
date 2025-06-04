@@ -1,6 +1,6 @@
 ---
 title: How I use OpenTofu (Terraform) to automate Authentik
-description: "In my Home Lab, I use Authentik to manage authentication and authorization for all users. This works great, but I often find myself doing tedious tasks like setting up my services. 
+description: "In my Home Lab, I use Authentik to manage authentication and authorization for all users. This works great, but I often find myself doing tedious tasks like setting up my services."
 pubDate: 2025-05-19
 tags:
   - Authentik
@@ -13,6 +13,7 @@ light: ./light.png
 dark: ./dark.png
 slug: how-i-use-opentofu-in-homelab
 ---
+
 ## Why OpenTofu?
 
 [OpenTofu](https://opentofu.org) is an open-source Infrastructure-as-Code (IaC) engine that
@@ -54,11 +55,13 @@ provider "authentik" {
 ```
 
 Save the token in `terraform.tfvars` like this:
+
 ```terraform title="terraform.tfvars"
 authentik_token = "your_api_token_here"
 ```
 
 ---
+
 ### Creating users
 
 Many people need access to my HomeLab for different use cases. In this section, I show how I create users with a random password.
