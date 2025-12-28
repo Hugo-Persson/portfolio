@@ -34,6 +34,22 @@
 
 = Experience
 
+
+#resume-entry(
+  title: "CTO",
+  location: "Nordic Kinetics AB",
+  date: "March 2025 - Present",
+)
+#resume-item[
+  - Employee number 1 for med-tech startup Nordic Kinetics
+  - Developed fullstack application with the purpose of monitoring Essential Tremor and Parkinsons diseas in patient
+    - Mobile app that collects sensor data for analysis and present information for patient
+    - Watch OS app to use CMMovementDisorderManager API
+    - SaaS web app for clinicians and researcher to use
+  - Helped perform major research study 
+  - Applied for 510k
+]
+
 #resume-entry(
   title: "App Developer",
   location: "Combain Mobile",
@@ -86,6 +102,9 @@
   - Assisted in organizing the Arkad career fair, coordinating logistics and company engagement.
   - Managed communications with companies, coordinated food deliveries, and led a team of volunteers.
 ]
+
+#pagebreak()
+
 
 = Projects
 
