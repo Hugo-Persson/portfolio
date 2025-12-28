@@ -1,5 +1,5 @@
 \documentclass[10pt,a4paper,ragged2e]{altacv}
-\geometry{left=2cm,right=10cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1.25cm,bottom=1.25cm}
+\geometry{left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm}
 \usepackage{hyperref}
 \ifxetexorluatex
   \setmainfont{Carlito}
@@ -42,18 +42,17 @@
 }
 
 %% Make the header extend all the way to the right, if you want.
-\begin{fullwidth}
 \makecvheader
-\end{fullwidth}
 
 %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
 \AtBeginEnvironment{itemize}{\small}
 
-%% Provide the file name containing the sidebar contents as an optional parameter to \cvsection.
-%% You can always just use \marginpar{...} if you do
-%% not need to align the top of the contents to any
-%% \cvsection title in the "main" bar.
-\cvsection[page1sidebar]{Experience}
+%% PAGE 1: Education and Experience
+\cvsection{Education}
+\cvevent{Master of Science in Computer Science and Engineering}{Lunds tekniska högskola}{2021 -- 2026}{}
+\cvevent{Exchange Semester in Computer Science and Engineering}{University of British Columbia}{Fall 2024}{}
+
+\cvsection{Experience}
 
 \cvevent{App developer}{Combain Mobile}{Jan 2024 -- Present}{}
 \begin{itemize}
@@ -128,26 +127,92 @@
 
 \clearpage
 
-% \cvsection[page2sidebar]{Publications}
+%% PAGE 2: Projects, Skills, and Languages
+\cvsection{Projects}
 
-\nocite{*}
+\cvproject{Obsidian LaTeX OCR Plugin}
+\github{\href{https://github.com/Hugo-Persson/obsidian-ocrlatex}{github.com/Hugo-Persson/obsidian-ocrlatex}}
+\smallskip
+\begin{itemize}
+\item More than 4300 downloads and 21 stars on GitHub
+\item Built with TypeScript for the Obsidian Markdown editor
+\item Converts images of math formulas into LaTeX format
+\end{itemize}
 
-% \printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
+\divider
 
-% \divider
+\cvproject{DNS CLI Tool}
+\github{\href{https://github.com/Hugo-Persson/godaddy-cli-tools}{github.com/Hugo-Persson/godaddy-cli-tools}}
+\smallskip
+\begin{itemize}
+\item Developed in Rust to manage DNS subdomains via CLI
+\item Automatically updates DNS records when public IP changes
+\item Supports subdomain registration and deletion from the CLI
+\end{itemize}
 
-% \printbibliography[heading=pubtype,title={\printinfo{\faFileTextO}{Journal Articles}}, type=article]
+\cvsection{Skills}
 
-% \divider
+\cvsubsection{Programming Languages}
+\cvtag{C}
+\cvtag{C++}
+\cvtag{Java}
+\cvtag{C\#}
+\cvtag{Rust}
+\cvtag{PHP}
+\cvtag{TypeScript}
+\cvtag{Scala}
+\cvtag{Swift}
+\cvtag{Kotlin}
+\cvtag{Python}
+\cvtag{Dart}
+\cvtag{Lua}
+\cvtag{HTML/CSS}
 
-% \printbibliography[heading=pubtype,title={\printinfo{\faGroup}{Conference Proceedings}},type=inproceedings]
+\divider
 
-% %% If the NEXT page doesn't start with a \cvsection but you'd
-% %% still like to add a sidebar, then use this command on THIS
-% %% page to add it. The optional argument lets you pull up the
-% %% sidebar a bit so that it looks aligned with the top of the
-% %% main column.
-% % \addnextpagesidebar[-1ex]{page3sidebar}
+\cvsubsection{Technologies}
+\cvtag{Docker}
+\cvtag{Git}
+\cvtag{Linux}
+\cvtag{NGINX}
+\cvtag{Traefik}
+\cvtag{RabbitMQ}
+\cvtag{Grafana}
+\cvtag{Loki}
+\cvtag{Prometheus}
+\cvtag{GitHub Actions}
+\cvtag{MQTT}
 
+\divider
+
+\cvsubsection{Frameworks}
+\cvtag{Next.js}
+\cvtag{Express}
+\cvtag{Nest.js}
+\cvtag{SvelteKit}
+\cvtag{SwiftUI}
+\cvtag{Flutter}
+\cvtag{React Native}
+\cvtag{Jetpack Compose}
+
+\divider
+
+\cvsubsection{Currently Learning}
+\cvtag{IoT}
+\cvtag{Embedded Programming}
+
+\cvsection{Languages}
+\begin{itemize}
+\item \textbf{Swedish} -- Native
+\item \textbf{English} -- Fluent
+\end{itemize}
+
+\cvsection{Interests}
+\cvtag{Traveling}
+\cvtag{Fitness}
+\cvtag{Running}
+\cvtag{Nature}
+\cvtag{Cooking}
+\cvtag{Home Automation}
 
 \end{document}

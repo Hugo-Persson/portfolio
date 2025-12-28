@@ -1,22 +1,19 @@
-name: Build LaTeX document
+name: Build Typst document
 on:
   workflow_dispatch:
   push:
     paths:
       - "resume/**"
 jobs:
-  build_latex:
+  build_typst:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v3
-        with:
-          working_directory: ./resume
-          root_file: ./mmayer.tex
-      - name: Move PDF file to public directory
-        run: mv ./resume/mmayer.pdf ./public/cv.pdf
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+      - name: Compile Typst document
+        run: typst compile --font-path resume/font resume/resume.typ ./public/cv.pdf
       - name: Configure git user
         run: |
           git config --global user.name "github-actions[bot]"
