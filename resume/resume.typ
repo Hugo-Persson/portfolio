@@ -1,5 +1,15 @@
 #import "@preview/modern-cv:0.9.0": *
 
+// Header with name and contact on pages 2+
+#set page(header: context {
+  if counter(page).get().first() > 1 [
+    #text(size: 9pt, fill: rgb("#555"))[
+      Hugo Persson #h(1fr) hugo.e.persson\@gmail.com | (+46) 72-240-6005
+    ]
+    #line(length: 100%, stroke: 0.5pt + rgb("#ddd"))
+  ]
+})
+
 #show: resume.with(
   author: (
     firstname: "Hugo",
@@ -20,9 +30,9 @@
 
 = Summary
 
-MSc Computer Science & Engineering student with 5+ years of experience building production software across mobile, backend, and web.
-Strong in TypeScript and Rust, with hands-on experience in iOS (Swift/SwiftUI), Android (Kotlin/Jetpack Compose), and cross-platform stacks.
-Comfortable owning features end-to-end, improving reliability with observability, and optimizing systems for performance.
+Software engineer with 5+ years of production experience across web, mobile, and infrastructure—currently CTO at a med-tech startup while completing my MSc.
+Systems thinker and fast learner who thrives on rapid prototyping and solving complex problems across the full stack.
+Career goal: transition into software architecture and technical leadership, designing systems at scale and guiding teams through high-impact projects.
 
 = Education
 
@@ -31,12 +41,19 @@ Comfortable owning features end-to-end, improving reliability with observability
   location: box[MSc Computer Science & Engineering (Exp. 2026)],
   date: "2021 – 2026",
 )
+#resume-item[
+  - Thesis: Designing a high-throughput, memory-efficient lookup table for graph database ingestion—benchmarking data structures for concurrent access under RAM constraints.
+  - Key takeaways: mathematical rigor, engineering thinking, and collaboration in team-based projects.
+]
 
 #resume-entry(
   title: "University of British Columbia (UBC)",
   location: "Exchange Semester, Computer Science and Engineering",
   date: "Fall 2024",
 )
+#resume-item[
+  - Chose exchange to grow personally—improved soft skills, learned to present myself, and gained new perspectives on collaboration and work culture.
+]
 
 = Experience
 
@@ -46,11 +63,10 @@ Comfortable owning features end-to-end, improving reliability with observability
   date: "Mar 2025 – Present",
 )
 #resume-item[
-  - First engineering hire at a med-tech startup building a tremor monitoring platform for Essential Tremor and Parkinson’s disease.
-  - Built end-to-end products across mobile, watchOS, and clinician/researcher dashboards (data capture → analysis-ready exports → UI).
-  - Implemented Apple Watch sensor integrations, including the CMMovementDisorderManager API.
-  - Partnered with clinicians and researchers to support study execution and iterate on product requirements.
-  - Contributed to regulatory readiness, including work toward an FDA 510(k) submission and CE certification.
+  - Responsible for all technical decisions in a 4-person med-tech startup (CEO, CFO, CTO, ML Engineer) building a tremor monitoring platform for Parkinson's and Essential Tremor.
+  - Own the full technology stack: mobile apps (iOS/Android), watchOS, cloud architecture, and clinician dashboards—from architecture to implementation.
+  - Partner with clinicians and researchers to translate clinical needs into product requirements and support study execution.
+  - Contribute to regulatory strategy (FDA 510(k), CE certification), balancing engineering decisions with compliance constraints.
 ]
 #resume-entry(
   title: "Head of IT",
@@ -58,10 +74,10 @@ Comfortable owning features end-to-end, improving reliability with observability
   date: "2024 – 2025",
 )
 #resume-item[
-  - Led development of the ARKAD mobile app, backend, and supporting services used to run the career fair.
-  - Set technical direction and feature priorities with the leadership group, aligning engineering work with organizational needs and event timelines.
-  - Managed the IT organization (frontend + backend), working through team leads/coordinators to unblock delivery and make architecture/technology decisions.
-  - Communicated status, risks, and technical trade-offs to cross-functional stakeholders to ensure smooth execution of the event.
+  - Responsible for all technical decisions for the IT team (11 people) within a 300-person student organization and 22-person project group.
+  - Owned app development strategy, architecture choices, and recruitment of new IT team members.
+  - Delivered the ARKAD mobile app, backend, and supporting services used to run the career fair.
+  - Represented IT in leadership meetings, translating technical trade-offs for non-technical stakeholders and contributing to organization-wide decisions.
 ]
 
 
@@ -71,9 +87,9 @@ Comfortable owning features end-to-end, improving reliability with observability
   date: "Jan 2024 – Jan 2026",
 )
 #resume-item[
-  - Maintained and shipped features across iOS and Android apps, adapting quickly to different codebases and architectures.
-  - Worked across SwiftUI/Objective-C, Jetpack Compose, and Flutter depending on product needs.
-  - Developed a local-first, on-device positioning prototype using Wi-Fi, Bluetooth, and GPS with ANN models running via ONNX Runtime.
+  - Mobile developer in a ~10-person team within a 30-person company specializing in positioning technology.
+  - Responsible for maintaining and shipping features across iOS and Android apps (SwiftUI/Objective-C, Jetpack Compose, Flutter).
+  - Led development of an on-device positioning prototype using Wi-Fi, Bluetooth, and GPS sensor fusion.
 ]
 
 #resume-entry(
@@ -82,11 +98,10 @@ Comfortable owning features end-to-end, improving reliability with observability
   date: "Sep 2020 – Jan 2024",
 )
 #resume-item[
-  - Built and maintained features in a production web platform using PHP, TypeScript, Node.js, and MySQL; added Rust services for performance-critical components.
-  - Improved bulk email throughput by 77× by introducing a RabbitMQ-based queue + worker architecture.
-  - Built a multi-channel notification system (Email, SMS, Web Push, Mobile Push) in Rust with retries and provider abstraction.
-  - Improved reliability and incident response by introducing/maintaining observability tooling (Grafana, Prometheus, Loki, Sentry).
-  - Developed and maintained the iOS/Android app using C\# (Xamarin.Forms).
+  - Full-stack developer in a 3-person dev team (6 total) at a recruitment platform company.
+  - Responsible for end-to-end feature development across the web platform (PHP, TypeScript, Node.js, MySQL) and mobile app (Xamarin).
+  - Owned DevOps infrastructure: containerized services with Docker, set up CI/CD pipelines, and built observability stack (Grafana, Prometheus, Loki, Sentry).
+  - Designed and implemented a RabbitMQ-based queue architecture that improved bulk email throughput by 77×.
 ]
 
 #resume-entry(
@@ -96,7 +111,7 @@ Comfortable owning features end-to-end, improving reliability with observability
 )
 #resume-item[
   - Founded and run an IT consulting business delivering software projects end-to-end (scoping, estimation, implementation, delivery).
-  - Managed client communication, requirements clarification, and technical decision-making across multiple engagements.
+  - Client-facing work here developed the requirements-gathering and communication skills now used when collaborating with clinicians and researchers.
 ]
 
 #resume-entry(
@@ -110,6 +125,16 @@ Comfortable owning features end-to-end, improving reliability with observability
 
 
 = Projects
+
+#resume-entry(
+  title: "Home Lab",
+  location: [#link("https://github.com/Hugo-Persson/HomeLab")[github.com/Hugo-Persson/HomeLab]],
+  date: "",
+)
+#resume-item[
+  - Personal infrastructure running 20+ containerized services across multiple servers using Docker Compose.
+  - Built sysadmin and DevOps skills: Traefik reverse proxy, Ansible automation, CI/CD pipelines, and monitoring (Grafana, Prometheus, Loki).
+]
 
 #resume-entry(
   title: "Obsidian LaTeX OCR Plugin",
