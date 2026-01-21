@@ -32,7 +32,7 @@
 
 Software engineer with 5+ years of production experience across web, mobile, and infrastructure—currently CTO at a med-tech startup while completing my MSc.
 Systems thinker and fast learner who thrives on rapid prototyping and solving complex problems across the full stack.
-Career goal: transition into software architecture and technical leadership, designing systems at scale and guiding teams through high-impact projects.
+Career goal: transition into software architecture and technical leadership, designing systems at scale.
 
 = Education
 
