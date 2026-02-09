@@ -1,33 +1,12 @@
 ---
 import { proseClasses } from "@root/constants";
 import Layout from "./Layout.astro";
-import Tabs from "@components/Tabs.astro";
-import DevLog from "@components/DevLog.astro";
-import { getCollection } from "astro:content";
 
 interface Props {
   name: string;
   slug: string
 }
-const { name, slug } = Astro.props;
-
-// Define tabs for project details
-const tabs = ["overview", "devlog"] as const;
-type TabType = typeof tabs[number];
-const tabLabels: Record<TabType, string> = {
-  "overview": "Overview",
-  "devlog": "Devlog"
-};
-
-// Query devlog entries for this project
-const devlogEntries = await getCollection('devlog', (entry) => {
-  return entry.id.startsWith(slug);
-});
-
-// Sort by date, newest first
-const sortedDevlogs = devlogEntries.sort((a, b) => {
-  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
-});
+const { name } = Astro.props;
 ---
 
 <Layout title={`Project - ${name}`}>
@@ -76,21 +55,7 @@ const sortedDevlogs = devlogEntries.sort((a, b) => {
     </div>
     
     <h1>{name}</h1>
-    <Tabs 
-      tabs={tabs} 
-      tabLabels={tabLabels} 
-      defaultTab="overview" 
-      containerId="project-tabs"
-    >
-      <div class="tab-content" data-tab="overview" data-active="true">
-        <!-- Default slot for main content (Overview) -->
-        <slot />
-      </div>
-      
-      <div class="tab-content" data-tab="devlog" data-active="false">
-        <DevLog entries={sortedDevlogs} />
-      </div>
-    </Tabs>
+    <slot />
   </div>
 
   </div>

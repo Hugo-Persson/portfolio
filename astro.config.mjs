@@ -2,7 +2,6 @@ import { defineConfig, passthroughImageService } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import expressiveCode from "astro-expressive-code";
 import sitemap from "@astrojs/sitemap";
-import { remarkReadingTime } from "./remark-reading-time.mjs";
 import tailwindcss from "@tailwindcss/vite";
 
 import mdx from "@astrojs/mdx";
@@ -19,7 +18,4 @@ export default defineConfig({
   },
   // output: "server",
   // adapter: cloudflare({}),
-  markdown: {
-    remarkPlugins: [remarkReadingTime],
-  },
 });
